@@ -24,7 +24,7 @@ const Cadastro = () => {
         
         const usuario = {nameUser, profileName, accountType, userCpf, email, password}
 
-        const resposta = await fetch("http://3.22.240.190:3333/usuarios", {
+        const resposta = await fetch("http://3.22.240.190:3050/user/create", {
             method: 'POST',
             body: JSON.stringify(usuario),
             headers: {
