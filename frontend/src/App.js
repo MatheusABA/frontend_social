@@ -10,6 +10,8 @@ import Cadastro from './pages/Cadastro'
 // app
 
 function App() {
+
+    
   return (
     <div className="App">
       <BrowserRouter>

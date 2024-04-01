@@ -63,11 +63,11 @@ const Cadastro = () => {
                     <h4 className="text-5xl font-medium">Cadastro</h4>
 
                     <div className="columns-2 mt-3 text-light pt-10">
-                        <div className="rounded text-white bg-blue-800 text-center px-16 py-2">
+                        <div className="rounded text-white bg-blue-800 text-center w-100 py-2">
                             <a href="/cadastro" className="font-bold text-sl tracking-wide">Cadastrar com Facebook</a>
                         </div>
                         
-                        <div className="rounded text-white bg-blue-400 text-center px-16 py-2">
+                        <div className="rounded text-white bg-blue-400 text-center w-100 py-2">
                             <a href="/cadastro" className="font-bold text-sl tracking-wide">Cadastrar com Google</a>
 
                         </div>
@@ -124,7 +124,7 @@ const Cadastro = () => {
                         value={tipo_de_conta}
                         />
                         
-                          <sub className='flex font-normal italic pt-2'><p className="text-light text-gray-400">Tipos de contas aceitas: </p>Formando, Graduado, Escritório de Arquitetura, Escritório de Design, Escritório de Engenharia, Escritório do Ramo </sub>  
+                        <sub className='grid font-normal italic pt-2'>Tipos de contas aceitas: <p className="text-light text-gray-400 pt-5">Formando,Graduado, Escritório de Arquitetura, Escritório de Design, Escritório de Engenharia, Escritório do Ramo </p></sub>  
 
                         {/* CPF */}
                         <div className=' mt-4'>
@@ -166,8 +166,8 @@ const Cadastro = () => {
                             <sub className='font-light italic'>Mínimo de 6 caracteres</sub>
                         </div>
                         <div>
-                            <input type='checkbox'/>
-                            <sub className='font-normal text-sl'> Ao criar minha conta eu aceito os<sub className="font-normal text-sl text-orange-600"> Termos de Uso</sub> e <sub className='font-normal text-sl text-orange-600'>Política de Privacidade.</sub>
+                            <input type='checkbox' className='align-middle size-5'/>
+                            <sub className='font-normal text-base align-baseline'> Ao criar minha conta eu aceito os<sub className="font-normal text-base text-orange-600 align-top"> Termos de Uso</sub> e <sub className='font-normal text-base text-orange-600 align-text-bottom'>Política de Privacidade.</sub>
                             </sub>
                         </div>
                         <br></br>
@@ -184,7 +184,7 @@ const Cadastro = () => {
 
 
             <div className="justify-between">
-                <img className="" alt="House" src={imagem_casa}/>
+                <img className="size-full md:size-auto" alt="House" src={imagem_casa}/>
             </div>
 
         </div>
