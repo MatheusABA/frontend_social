@@ -10,19 +10,19 @@ import imagem_casa from '../images/House-Modern-House-3D-Architectural-Rendering
 
 
 const Cadastro = () => {
-    const [nome, setNome] = useState('')
-    const [nome_perfil, setNomePerfil] = useState('')
-    const [tipo_de_conta, setConta] = useState('')
-    const [cpf, setCPF] = useState('')
+    const [nameUser, setNome] = useState('')
+    const [profileName, setNomePerfil] = useState('')
+    const [accountType, setConta] = useState('')
+    const [userCpf, setCPF] = useState('')
     const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
+    const [password, setSenha] = useState('')
     const [error, setError] = useState('')
 
 
     const handleSubmit = async (e) => {
         // e.preventDefault();
         
-        const usuario = {nome, nome_perfil, tipo_de_conta, cpf, email, senha}
+        const usuario = {nameUser, profileName, accountType, userCpf, email, password}
 
         const resposta = await fetch("http://3.22.240.190:3333/usuarios", {
             method: 'POST',
@@ -90,7 +90,7 @@ const Cadastro = () => {
                         id="nome"
                         type="text"
                         onChange={(e) => setNome(e.target.value)}
-                        value={nome}
+                        value={nameUser}
                         />
 
 
@@ -102,7 +102,7 @@ const Cadastro = () => {
                         id="nome_perfil"
                         type="text"
                         onChange={(e) => setNomePerfil(e.target.value)}
-                        value={nome_perfil}
+                        value={profileName}
                         />
                         
                           <sub className='flex font-light italic pt-2'><p className="text-light text-gray-400">Seu perfil será encontrado pela URL: http://arqnex.com/</p>nome de perfil</sub>  
@@ -121,7 +121,7 @@ const Cadastro = () => {
                         id="conta"
                         type="text"
                         onChange={(e) => setConta(e.target.value)}
-                        value={tipo_de_conta}
+                        value={accountType}
                         />
                         
                         <sub className='grid font-normal italic pt-2'>Tipos de contas aceitas: <p className="text-light text-gray-400 pt-5">Formando,Graduado, Escritório de Arquitetura, Escritório de Design, Escritório de Engenharia, Escritório do Ramo </p></sub>  
@@ -135,7 +135,7 @@ const Cadastro = () => {
                         id="cpf"
                         type="text"
                         onChange={(e) => setCPF(e.target.value)}
-                        value={cpf}
+                        value={userCpf}
                         />
                         
                         {/* Email */}
@@ -160,7 +160,7 @@ const Cadastro = () => {
                         id="senha"
                         type="text"
                         onChange={(e) => setSenha(e.target.value)}
-                        value={senha}
+                        value={password}
                         />
                         <div>
                             <sub className='font-light italic'>Mínimo de 6 caracteres</sub>
