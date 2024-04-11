@@ -12,7 +12,7 @@ const EmployeeForm = () => {
 
         const employee = {name, email, job}
 
-        const response = await fetch("http://localhost:4000/api/employees/", {
+        const response = await fetch("http://localhost:3030/api/employees/", {
             method: 'POST',
             body: JSON.stringify(employee),
             headers: {

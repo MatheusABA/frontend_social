@@ -32,15 +32,12 @@ import imagem_c4_r4 from '../images/PhysCamera008_dawn.png'
 const Home = () => {
 
 
-
-
-
     return(
-        <header>
+        <>
             {/* DIV DA PARTE SUPERIOR DA TELA, RELACIONADO AS REDES SOCIAIS, ENTRAR AGORA E COMO FUNCIONA */}
             <div className="flex"> 
                 
-                <div> {/* TEXTO VERTICAL TELA INICIAL */}
+                <div className=""> {/* TEXTO VERTICAL TELA INICIAL */}
 
                     <div className="text-base align-text-bottom px-12 py-20 text-gray-300 tracking-wide [writing-mode:vertical-lr] rotate-180">
                         Twitter
@@ -54,7 +51,7 @@ const Home = () => {
 
                 </div>
                             
-                <div className="w-full h-full relative grid">    {/* IMAGEM COM TEXTO NA TELA */}
+                <div className="container  w-full h-full relative grid">    {/* IMAGEM COM TEXTO NA TELA */}
                         <img alt="inicial" src={imagem_tela_inicial} className="absolute w-full h-100"></img>
                         <div className="absolute grid-cols-2">
                             {/* <div className=""> */}
@@ -64,31 +61,11 @@ const Home = () => {
                                 <button className="ml-20 my-10 px-14 py-2 font-semibold text-orange-600 rounded border-2 border-white bg-white">
                                     Entrar agora
                                 </button>
-                            
-                            
                         </div>
                         <div className="relative flex flex-col items-end">
                         {/**Quebra linha */}
-                            <div>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                            </div>
                             {/* <p className="place-content-center rounded-lg border-2 w-10 h-0 border-orange-950"></p> */}
-                            <h1 className="text-right text-lg text-white px-10">Como</h1>
+                            <p className="text-right text-lg text-white px-10">Como</p>
                             <h1 className="text-right text-xl text-white px-10 tracking-wide">Funciona</h1>
                             <img alt="cf" src={imagem_cf} className="my-2 w-auto h-auto mr-10 rounded-lg border"></img>
 
@@ -126,13 +103,13 @@ const Home = () => {
 
             <p className="border-2 w-full border-gray-100"></p>
 
-            <div className="grid grid-cols-5 mt-10 ml-2">  {/*RODAPE */}
+            <div className="grid grid-cols-5 mt-10 ml-2 gap-4 justify-auto">  {/*RODAPE */}
 
                 <div className="flex">
-                    <p className="items-center">
+                    <h4 className="items-center">
                         <img src={logo} alt="arqnex" className="h-6"/>
-                        <h1 className="text-xl my-1">Lorem ipsum dolor sit</h1>
-                    </p>
+                        <p className="text-xl my-1">Lorem ipsum dolor sit</p>
+                    </h4>
                 </div>
 
                 <div className="">
@@ -170,7 +147,7 @@ const Home = () => {
 
             </div>
             
-        </header>
+        </>
         
 
     )
