@@ -3,10 +3,11 @@ import './UploadDetails.css'; // Nome do arquivo CSS que você criará para esti
 import uploadImage from '../images/upload_details.png';
 import Tag from '../components/Tag'; // Importe o componente Tag
 import logo from '../images/arqnex_rodape.png'
+import { useLocation } from 'react-router-dom';
 
-function UploadDetails() {
+const UploadDetails = (props) => {
   // Substitua `uploadedImage` pelo caminho da imagem carregada pelo usuário
-  const uploadedImage = uploadImage;
+  // const uploadedImage = uploadImage;
 
   const [tags, setTags] = useState(['VRay']); // Exemplo de estado inicial
 
@@ -14,6 +15,9 @@ function UploadDetails() {
     setTags(tags.filter(tag => tag !== tagToDelete));
   };
 
+  const location = useLocation();
+  const { image } = location.state;     // URL DA IMAGEM
+  
   return (
   <>  
     <div className="details-container">
@@ -22,7 +26,7 @@ function UploadDetails() {
       
       <div className="flex-container">
         <div className="image-preview-container">
-            <img src={uploadedImage} alt="Imagem Carregada" className="uploaded-image" />
+            <img src={image} alt="Imagem Carregada" className="uploaded-image" />
             <div className="attachments-title">
               <span className="attachments-style">Anexos</span> <span className="pro-style">PRO</span>
             </div>
@@ -53,8 +57,9 @@ function UploadDetails() {
             <h3 className='forms-titles'>Título</h3>
             <input type="text" className="input-field" />
             <h3 className='forms-titles'>Softwares</h3>
-            <select className="input-field">
-                <option></option>
+            <select className="input-field" >
+                <option value="0"></option>
+                <option value="1">VRay</option>
                 {/* Opções */}
             </select>
             <div className="tags-container">
@@ -74,7 +79,9 @@ function UploadDetails() {
             </select>
             <h3 className='forms-titles'>Tipo</h3>
             <select className="input-field">
-                <option></option>
+                <option>
+                  
+                </option>
                 {/* Opções */}
             </select>
             <h3 className='forms-titles'>Descrição</h3>
@@ -139,3 +146,4 @@ function UploadDetails() {
 }
 
 export default UploadDetails;
+

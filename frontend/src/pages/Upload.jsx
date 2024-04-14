@@ -1,13 +1,31 @@
-import React from 'react';
+import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Upload.css'; // Certifique-se de criar um arquivo CSS correspondente
 import uploadIcon from '../images/upload.png';
 
+
 const Upload = (props) => {
-  // Função para lidar com o evento de upload
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const navigate = useNavigate();
+  
   const handleUpload = (event) => {
-    // Aqui você pode adicionar a lógica para lidar com o arquivo enviado
-    console.log(event.target.files);
+    const file = event.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setSelectedFile(reader.result);
+        navigate(
+          "/uploaddetails",
+          { state: { image: reader.result } }
+        );
+      };
+    };
+    
   };
+
+  
   props.setIsUpload(true);
 
   return (
@@ -29,7 +47,7 @@ const Upload = (props) => {
           id="fileInput"
           className="file-input"
           onChange={handleUpload}
-          multiple
+          
         />
         <label htmlFor="fileInput" className="file-label">
           <img src={uploadIcon} alt="Upload" className="upload-icon"/>
