@@ -30,8 +30,8 @@ const LoginModal = () => {
                         <Input size={'lg'} borderRadius={'5px'}></Input>
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Senha</Text>
                         <Input size={'lg'} borderRadius={'5px'}></Input>
-                        <Text as={Link} color={'#DB752C'} ml={'13rem'} fontSize={'21px'} fontWeight={'bold'} my={5} mr={0} pl={6}>Esqueceu a senha?</Text>
-                        <Button bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
+                        <Text as={Link} color={'#DB752C'} ml={'13rem'} fontSize={'21px'} fontWeight={'bold'} my={5} mr={0} pl={6} to={'/cadastro'} onClick={onClose} >Esqueceu a senha?</Text>
+                        <Button onClick={onClose} as={Link} to={'/'} bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
                             <Text fontSize={'1.2rem'}>Entrar</Text>
                         </Button>
                     </Stack>

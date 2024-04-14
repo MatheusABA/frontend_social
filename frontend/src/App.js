@@ -25,6 +25,7 @@ const [isLogged, setIsLogged] = useState(false)
           <Routes>
             <Route path="/" element={isLogged ? <HomeLogged /> : <Home />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            
           </Routes>
         </div>
       </BrowserRouter>

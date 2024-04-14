@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/arqnex_logo.png'
-import bgLogoModal from '../images/banter-back.png'
-import { Image, Box, Flex, Button, IconButton, Text, Wrap, WrapItem, Stack, HStack, useDisclosure } from '@chakra-ui/react'
+import { Image, Box, Flex, Button, IconButton, Text, Wrap, WrapItem, Stack, HStack, useDisclosure, AvatarBadge, Avatar } from '@chakra-ui/react'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import LoginModal from './LoginModal';
 import NavLink from './NavLink';
@@ -19,6 +18,9 @@ const Navbar = ({isLogged}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
+
+                <>
+                    {/* NAVBAR PARTE ESQUERDA */}
                     <Box bgColor='white' px={4} >
                         <Flex h={16} alignItems={"center"} justifyContent="space-between">
                             <Flex display={{'base': 'flex', 'md': 'none'}} alignItems={'center'}>
@@ -36,7 +38,8 @@ const Navbar = ({isLogged}) => {
                                     ))}
                                 </HStack>
                             </HStack>
-                            {!isLogged && (
+                            {/* CONDICAO LOGADO-NAO_LOGADO - PARTE DIREITA */}
+                            {!isLogged ? (      /** SE NAO TIVER LOGADO - PARTE DIREITA MOSTRA PARA ENTRAR - CADASTRAR */
                                 <Flex alignItems={'center'}>
                                 <LoginModal />
                                 <Button as={Link} to={`/cadastro`} variant={'outline'} w={'10rem'}>
@@ -45,9 +48,16 @@ const Navbar = ({isLogged}) => {
                                     </Text>
                                 </Button>
                                 </Flex>
-                            )}
+                            ) : (       /* CASO LOGADO, MOSTRA OS ICONES CORRESPONDENTE AO USUARIO, ETC... */
+                                <Flex alignItems={'center'}>
+                                    <Text color={'#FF6A00'}></Text>
+
+                                </Flex>
+                            )} 
                             
                         </Flex>
+
+                        {/* NAVBAR TAMANHO SM(CELULAR) - PARTE ESQUERDA */}
                         <Box display={'flex'}>
 				            {isOpen && (
                                 <Box pb={4} display={{md: 'none'}}>
@@ -62,6 +72,7 @@ const Navbar = ({isLogged}) => {
                             )}
                         </Box>
                     </Box>
+                </>
     )
 }
 

@@ -33,6 +33,7 @@ const Home = () => {
 
 
     return(
+        
         <>
             {/* DIV DA PARTE SUPERIOR DA TELA, RELACIONADO AS REDES SOCIAIS, ENTRAR AGORA E COMO FUNCIONA */}
             <div className="flex"> 
