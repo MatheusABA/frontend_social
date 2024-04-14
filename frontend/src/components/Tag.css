@@ -1,0 +1,39 @@
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #EEEEEE;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 110px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tag-icon {
+    width: 16px; /* Ou o tamanho que você desejar para o ícone */
+    height: 16px; /* Mantenha a mesma altura e largura para o ícone ser quadrado */
+    margin-right: 7px;
+    margin-left: 7px;
+  }
+  
+  .tag-label {
+    margin-right: 10px;
+    font-size: bold;
+  }
+  
+  .tag-delete-button {
+    width: 35px;
+    height: 35px;
+    background: #EEEEEE;
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+    font-size: 17px;
+    color: black;
+    margin-right: -20px;
+    text-align: top;
+    font-weight:normal;
+    font-family: Arial;
+  }  
