@@ -4,10 +4,8 @@ import logo from '../images/logo-white.png'
 import bgLogoModal from '../images/banter-back.png'
 import { Input, Stack, InputRightElement, Flex, Image, Box, Text, Button ,Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, } from '@chakra-ui/react'
 
-const LoginModal = () => {
+const LoginModal = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [show, setShow] = React.useState(false)
-    const handleClick = () => setShow(!show)
 
     return (
         <>
@@ -31,7 +29,10 @@ const LoginModal = () => {
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Senha</Text>
                         <Input size={'lg'} borderRadius={'5px'}></Input>
                         <Text as={Link} color={'#DB752C'} ml={'13rem'} fontSize={'21px'} fontWeight={'bold'} my={5} mr={0} pl={6} to={'/cadastro'} onClick={onClose} >Esqueceu a senha?</Text>
-                        <Button onClick={onClose} as={Link} to={'/'} bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
+                        <Button onClick={() => {
+                            props.setIsLogged(true);
+                            onClose();
+                        }} as={Link} to={'/'} bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
                             <Text fontSize={'1.2rem'}>Entrar</Text>
                         </Button>
                     </Stack>

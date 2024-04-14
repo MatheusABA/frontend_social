@@ -2,12 +2,13 @@ import React from 'react';
 import './Upload.css'; // Certifique-se de criar um arquivo CSS correspondente
 import uploadIcon from '../images/upload.png';
 
-function Upload() {
+const Upload = (props) => {
   // Função para lidar com o evento de upload
   const handleUpload = (event) => {
     // Aqui você pode adicionar a lógica para lidar com o arquivo enviado
     console.log(event.target.files);
   };
+  props.setIsUpload(true);
 
   return (
     <div className="upload-container">

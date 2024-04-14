@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from '../images/arqnex_logo.png'
-import { Image, Box, Flex, Button, IconButton, Text, Wrap, WrapItem, Stack, HStack, useDisclosure, AvatarBadge, Avatar } from '@chakra-ui/react'
-import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { Image, Box, Flex, Button, IconButton, Text, Stack, HStack, useDisclosure, AvatarBadge, Avatar } from '@chakra-ui/react'
+import { CloseIcon, EmailIcon, HamburgerIcon } from '@chakra-ui/icons'
 import LoginModal from './LoginModal';
 import NavLink from './NavLink';
 
@@ -14,8 +14,9 @@ const Links = [
 	{ name: 'Ao Vivo', route: '/live'},
 ]
 
-const Navbar = ({isLogged}) => {
+const Navbar = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    console.table(props)
 
     return (
 
@@ -30,29 +31,46 @@ const Navbar = ({isLogged}) => {
                                 <Box alignItems={'center'} display={'flex'} mx={1}>
                                     <Image src={logo} mx={2}/>
                                 </Box>
-                                <HStack as={'nav'}  spacing={4} display={{base: 'none', md: 'flex'}}>
-                                    {Links.map((link) => (
-                                        <NavLink route={link.route} key={link.route}>
-                                            <Text fontWeight={'medium'}>{link.name}</Text>
-                                        </NavLink>
-                                    ))}
-                                </HStack>
+                                <Box display={!props.isUpload ? 'flex' : 'none'}>
+                                    <HStack as={'nav'}  spacing={4} display={{base: 'none', md: 'flex'}}>
+                                        {Links.map((link) => (
+                                            <NavLink route={link.route} key={link.route}>
+                                                <Text fontWeight={'medium'}>{link.name}</Text>
+                                            </NavLink>
+                                        ))}
+                                    </HStack>
+                                </Box>
+                                
                             </HStack>
                             {/* CONDICAO LOGADO-NAO_LOGADO - PARTE DIREITA */}
-                            {!isLogged ? (      /** SE NAO TIVER LOGADO - PARTE DIREITA MOSTRA PARA ENTRAR - CADASTRAR */
+                            {!props.isLogged ? (      /** SE NAO TIVER LOGADO - PARTE DIREITA MOSTRA PARA ENTRAR - CADASTRAR */
                                 <Flex alignItems={'center'}>
-                                <LoginModal />
+                                <LoginModal isLogged={props.isLogged} setIsLogged={props.setIsLogged} />
                                 <Button as={Link} to={`/cadastro`} variant={'outline'} w={'10rem'}>
                                     <Text>
                                         Cadastrar
                                     </Text>
                                 </Button>
                                 </Flex>
-                            ) : (       /* CASO LOGADO, MOSTRA OS ICONES CORRESPONDENTE AO USUARIO, ETC... */
-                                <Flex alignItems={'center'}>
-                                    <Text color={'#FF6A00'}></Text>
-
-                                </Flex>
+                            ) : ( /* CASO LOGADO, MOSTRA OS ICONES CORRESPONDENTE AO USUARIO, ETC... */
+                                props.isUpload ? (       
+                                    <HStack spacing={5}>
+                                        <Text as={Link} to='/pro'bgGradient="linear-gradient(270deg, #FF6A00 0%, #EE2C09 100%)" bgClip='text' fontWeight='bold'>Faça um upgrade, torne-se PRO</Text>
+                                        <Avatar size={'md'}/>
+                                    </HStack>
+                                ) : (
+                                    <HStack spacing={5}>
+                                        <Text as={Link} to='/pro'bgGradient="linear-gradient(270deg, #FF6A00 0%, #EE2C09 100%)" bgClip='text' fontWeight='bold'>Faça um upgrade, torne-se PRO</Text>
+                                        <Avatar size={'md'}/>
+                                        <Avatar bg={'white'}>
+                                            <IconButton icon={<EmailIcon/>} variant={'ghost'}/>
+                                            <AvatarBadge boxSize='1em' bg='tomato' />
+                                        </Avatar>
+                                        <Button colorScheme='red' onClick={() =>{
+                                            props.setIsLogged(false)
+                                        }}>Logout</Button>
+                                    </HStack>
+                                )
                             )} 
                             
                         </Flex>

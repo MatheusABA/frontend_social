@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 
 
 //components
@@ -27,8 +28,8 @@ import imagem_c4_r4 from '../images/PhysCamera008_dawn.png'
 
 
 
-const HomeLogged = () => {
-
+const HomeLogged = (props) => {
+  props.setIsUpload(false);
 
     return(
         <>
@@ -38,8 +39,17 @@ const HomeLogged = () => {
                 <h4 className="text-3xl font-normal text-gray-300 break-words pt-3 lg:max-w-92 md:max-w-92 sm:max-w-full">Lorem ipsum dolor sit amet, conseteur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h4>
                 
                 <div className="lg:flex md:grid sm:grid lg:space-x-10 mg:space-x-10 sm:space-y-5 lg:pt-5 md:pt-5 sm:pt-5">
-                  <button className="bg-orange-500 text-white active:bg-orange-600 hover:bg-orange-300 font-bold  text-sm px-10 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 lg:ease-linear lg:transition-all lg:duration-150">Postar trabalho</button>
-                  <button className="text-orange-600 font-semibold italic text-sm lg:mr-0 md:mr-0 sm:mr-0">Fazer um upgrade, torne-se PRO</button>
+                  <Link to={'/upload'}>
+                    <button className="bg-orange-500 text-white active:bg-orange-600 hover:bg-orange-300 font-bold  text-sm px-10 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 lg:ease-linear lg:transition-all lg:duration-150">
+                    Postar trabalho
+                    </button>
+                  </Link>
+                  <Link to={'/pro'}>
+                    <button className="text-orange-600 font-semibold italic text-sm lg:mr-0 md:mr-0 sm:mr-0">
+                      Fazer um upgrade, torne-se PRO
+                    </button>
+                  </Link>
+                  
                 </div>
 
 

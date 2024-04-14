@@ -29,8 +29,8 @@ import imagem_c4_r4 from '../images/PhysCamera008_dawn.png'
 
 
 
-const Home = () => {
-
+const Home = (props) => {
+    props.setIsUpload(false);
 
     return(
         
