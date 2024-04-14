@@ -18,6 +18,10 @@ const UploadDetails = (props) => {
   const location = useLocation();
   const { image } = location.state;     // URL DA IMAGEM
   
+  
+
+
+
   return (
   <>  
     <div className="details-container">

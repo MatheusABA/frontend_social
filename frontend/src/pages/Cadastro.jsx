@@ -17,14 +17,14 @@ const Cadastro = () => {
     const [email, setEmail] = useState('')
     const [password, setSenha] = useState('')
     const [error, setError] = useState('')
-
+    
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         
         const usuario = {nameUser, profileName, accountType, userCpf, email, password}
 
-        const resposta = await fetch("http://3.22.240.190:3050/user/create", {
+        const resposta = await fetch("/user/create", {
             method: 'POST',
             body: JSON.stringify(usuario),
             headers: {
@@ -80,7 +80,7 @@ const Cadastro = () => {
                     <p className="mt-4 rounded-lg border border-gray-100"></p>
 
                     
-                    <form className="create font-bold" onSubmit={handleSubmit}>
+                    <form className="create font-bold" method='POST' onSubmit={handleSubmit}>
 
                         <div className=' mt-4'>
                             <label className="text-xl text-light">Nome</label>
@@ -158,7 +158,7 @@ const Cadastro = () => {
                         <input
                         className="rounded border-2 w-full p-1"
                         id="senha"
-                        type="text"
+                        type="password"
                         onChange={(e) => setSenha(e.target.value)}
                         value={password}
                         />
@@ -171,7 +171,7 @@ const Cadastro = () => {
                             </sub>
                         </div>
                         <br></br>
-                        <button className='hover:bg-orange-800 mt-5 p-3 rounded-lg border-2 border-orange-600 bg-orange-600 text-white font-black'>Criar minha conta</button>
+                        <button className='hover:bg-orange-800 mt-5 p-3 rounded-lg border-2 border-orange-600 bg-orange-600 text-white font-black' type="submit" >Criar minha conta</button>
                         {error && <div className='error'>{error}</div>}
 
                     </form>
