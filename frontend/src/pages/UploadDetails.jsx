@@ -41,7 +41,7 @@ const UploadDetails = (props) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/user/post', {
+      const response = await fetch('http://3.22.240.190:3050/user/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
