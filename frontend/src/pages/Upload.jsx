@@ -53,7 +53,7 @@ const Upload = (props) => {
           onChange={handleUpload}
           
         />
-        <label htmlFor="fileInput" className="file-label">
+        <label className="file-label">
           <img src={uploadIcon} alt="Upload" className="upload-icon"/>
           <p className='upload-info1'>Arraste para fazer o upload</p>
           <p>Ou clique para abrir a mídia</p>
