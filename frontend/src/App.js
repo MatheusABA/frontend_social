@@ -23,15 +23,17 @@ const [isUpload, setIsUpload] = useState(false)
   return (
     <ChakraProvider>
       <BrowserRouter>
-        <Navbar isLogged={isLogged} setIsLogged={setIsLogged} isUpload={isUpload} setIsUpload={setIsUpload}/>
-        <div className="pages">
-          <Routes>
-            <Route path="/" element={isLogged ? <HomeLogged isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-            <Route path="/uploaddetails" element={<UploadDetails />} />
-          </Routes>
-        </div>
+       
+          <Navbar isLogged={isLogged} setIsLogged={setIsLogged} isUpload={isUpload} setIsUpload={setIsUpload}/>
+          <div className="pages">
+            <Routes>
+              <Route path="/" element={isLogged ? <HomeLogged isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+              <Route path="/uploaddetails" element={<UploadDetails />} />
+            </Routes>
+          </div>
+        
       </BrowserRouter>
     </ChakraProvider>
       

@@ -1,25 +1,80 @@
-import React, { useState } from 'react';
-import './UploadDetails.css'; // Nome do arquivo CSS que você criará para estilizar esta página
-import uploadImage from '../images/upload_details.png';
+import { React, useState } from 'react';
+import '../style.css'; // Nome do arquivo CSS que você criará para estilizar esta página
+import { Link } from 'react-router-dom'
 import Tag from '../components/Tag'; // Importe o componente Tag
 import logo from '../images/arqnex_rodape.png'
 import { useLocation } from 'react-router-dom';
 
 const UploadDetails = (props) => {
-  // Substitua `uploadedImage` pelo caminho da imagem carregada pelo usuário
-  // const uploadedImage = uploadImage;
 
-  const [tags, setTags] = useState(['VRay']); // Exemplo de estado inicial
-
-  const handleDeleteTag = (tagToDelete) => {
-    setTags(tags.filter(tag => tag !== tagToDelete));
-  };
-
+  // IMAGEM
   const location = useLocation();
-  const { image } = location.state;     // URL DA IMAGEM
   
-  
+  const { image, userId } = location.state;
+  console.log(userId)
+  // DADOS ENVIADOS
+  const [formData, setFormData] = useState({
+    userId: userId,
+    titlePost:'',
+    softwares: '',
+    styles: '',
+    projects: '',
+    types: '',
+    descriptionPost: '',
+    imagePost: image
+  });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/user/post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: userId,
+          titlePost: formData.titlePost,
+          softwares: formData.softwares,
+          styles: formData.styles,
+          projects: formData.projects,
+          types: formData.types,
+          descriptionPost: formData.descriptionPost,
+          imagePost: image
+        }),
+        
+      });
+
+      console.log('userId:', userId);
+      console.log('titlePost:', formData.titlePost);
+      console.log('softwares:', formData.softwares);
+      console.log('styles:', formData.styles);
+      console.log('projects:', formData.projects);
+      console.log('types:', formData.types);
+      console.log('descriptionPost:', formData.descriptionPost);
+      console.log('imagePost:', image);
+    
+      if (response.ok) {
+        console.log('Postagem feita com sucesso!');
+      } else {
+        console.log('Erro ao fazer postagem!')
+      }
+
+      
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
 
 
   return (
@@ -35,7 +90,7 @@ const UploadDetails = (props) => {
               <span className="attachments-style">Anexos</span> <span className="pro-style">PRO</span>
             </div>
             <div className="additional-images-container">
-            {/* Substitua os placeholders por lógica para mostrar imagens adicionais ou inputs para upload */}
+              {/** FALTA ADICIOANR LOGICA PARA OS PROS */}
             <div className="additional-image">
                 <span class="material-icons icon-photo">image</span>
             </div>
@@ -51,55 +106,96 @@ const UploadDetails = (props) => {
             <div className="additional-image">
                 <span class="material-icons icon-photo">image</span>
             </div>
-            {/* Adicione mais conforme necessário */}
+            
             </div>
         </div>
 
-        <div className="form-container">
-            {/* Formulário com seus campos */}
+        <form className="create form-container" method='POST' onSubmit={handleSubmit}>
+            {/* Formulário */}
             <div className="form-fields">
             <h3 className='forms-titles'>Título</h3>
-            <input type="text" className="input-field" />
+            <input
+            type="text"
+            className="input-field"
+            name="titlePost"
+            value={formData.titlePost}
+            onChange={handleInputChange}
+            />
+
             <h3 className='forms-titles'>Softwares</h3>
-            <select className="input-field" >
+            <select
+            className="input-field"
+            name='softwares'
+            value={formData.softwares}
+            onChange={handleInputChange}
+            >
                 <option value="0"></option>
-                <option value="1">VRay</option>
-                {/* Opções */}
+                <option value="VRay">VRay</option>
+                <option value="Photoshop">Photoshop</option>
+                <option value="Adobe">Adobe</option>
             </select>
-            <div className="tags-container">
-             {tags.map((tag, index) => (
-               <Tag key={index} label={tag} onDelete={() => handleDeleteTag(tag)} />
-             ))}
-            </div>
+
             <h3 className='forms-titles'>Estilos</h3>
-            <select className="input-field">
-                <option></option>
-                {/* Opções */}
+            <select
+            className="input-field"
+            name='styles'
+            value={formData.styles}
+            onChange={handleInputChange}
+            >
+                <option value="0"></option>
+                <option value="Contemporâneo">Contemporâneo</option>
+                <option value="Moderno">Moderno</option>
+                <option value="Popular">Popular</option>
+
             </select>
+
+
+
             <h3 className='forms-titles'>Projeto</h3>
-            <select className="input-field">
-                <option></option>
-                {/* Opções */}
+            <select
+            className="input-field"
+            name='projects'
+            value={formData.projects}
+            onChange={handleInputChange}
+            >
+                <option value="0"></option>
+                <option value="Portfolio">Portfolio</option>
+                <option value="Album">Album</option>
+                <option value="Andamento">Projeto em andamento...</option>
             </select>
+
             <h3 className='forms-titles'>Tipo</h3>
-            <select className="input-field">
-                <option>
-                  
-                </option>
-                {/* Opções */}
+            <select
+            className="input-field"
+            name='types'
+            value={formData.types}
+            onChange={handleInputChange}
+            >
+                <option value="0"></option>
+                <option value="Arquitetônico">Arquitetônico</option>
+                <option value="Engenharia">Engenharia</option>
+                <option value="Design">Design</option>
+                
             </select>
+
             <h3 className='forms-titles'>Descrição</h3>
             <textarea 
             className="input-field description-textarea"
             rows="4"
+            name='descriptionPost'
+            value={formData.descriptionPost}
+            onChange={handleInputChange}
             ></textarea>
             </div>
 
             <div className="actions">
-            <button className="publish-button" font-weight="bold">Publicar</button>
-            <button className="cancel-button">Cancelar</button>
+              <button className="publish-button" font-weight="bold" type='submit'>Publicar</button>
+                <Link to={'/upload'}>
+                  <button className="cancel-button">Cancelar</button>
+                </Link>
             </div>
-        </div>
+        </form>
+
       </div>
     </div>
       <div className="grid grid-cols-5 mt-10 ml-2 gap-4 justify-auto">  {/*RODAPE */}
@@ -147,6 +243,7 @@ const UploadDetails = (props) => {
       </div>
   </>
   );
+
 }
 
 export default UploadDetails;

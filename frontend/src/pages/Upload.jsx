@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Upload.css'; // Certifique-se de criar um arquivo CSS correspondente
+import { useNavigate, useLocation } from 'react-router-dom';
+import '../style.css'; // Certifique-se de criar um arquivo CSS correspondente
 import uploadIcon from '../images/upload.png';
 
 
@@ -9,6 +9,10 @@ const Upload = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   
+  const location = useLocation();
+  const userId = location.state?.userId;
+  console.log(userId);
+
   const handleUpload = (event) => {
     const file = event.target.files[0];
     if(file) {
@@ -18,7 +22,7 @@ const Upload = (props) => {
         setSelectedFile(reader.result);
         navigate(
           "/uploaddetails",
-          { state: { image: reader.result } }
+          { state: { image: reader.result, userId: userId } }
         );
       };
     };
@@ -36,7 +40,7 @@ const Upload = (props) => {
       </header>
       <div className="upload-box" onClick={() => document.getElementById('fileInput').click()}>
         <div className="upload-instructions">
-          <span class="material-icons icon-photo">image</span>
+          <span className="material-icons icon-photo">image</span>
           <div className="instruction-text">
             <p className='photo-info'>Fotos de alta resolução</p>
             <p className='photo-type'>PNG, JPEG (800x600)</p>

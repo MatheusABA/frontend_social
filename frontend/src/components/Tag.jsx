@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tag.css'; // Ajuste o caminho conforme a estrutura do seu projeto
+import '../style.css'; // Ajuste o caminho conforme a estrutura do seu projeto
 import tagIcon from '../images/vray-icone.png';
 
 const Tag = ({ label, onDelete }) => {

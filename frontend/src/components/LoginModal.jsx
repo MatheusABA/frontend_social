@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, createContext, useContext } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import logo from '../images/logo-white.png'
 import bgLogoModal from '../images/banter-back.png'
 import { Input, Stack, InputRightElement, Flex, Image, Box, Text, Button ,Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom';
+
 
 
 const LoginModal = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
+    // usado para navegar entre paginas e mandar `estados` - 
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = async (e) => {
         const user = {login, password};
-        // const navigate = useNavigate();
-
+        var userId = null;
         const resposta = await fetch("/user/login", {
             method: 'POST',
             body: JSON.stringify(user),
@@ -31,9 +32,17 @@ const LoginModal = (props) => {
         if (resposta.ok) {
             setLogin('');
             setPassword('');
-            console.log('Usuario logado com sucesso', json);
+            userId = json.userId;
+            console.log('Usuario logado com sucesso',json);
+            props.setIsLogged(true);        // permitindo o usuario ir a homeLogado caso informações sejam validadas
+            navigate("/", { state: { userId: userId } })     // navegar ate a home logada e tentando mandar o userId -> necesario para fazer post
+            onClose();
             
-            // navigate("/")
+        } else {        // nao validado o login retorna para home e com erro ao fazer login no console
+            setLogin('');
+            setPassword('');
+            console.log('Erro ao fazer login')
+            navigate('/')
         }
     }
 
@@ -59,10 +68,9 @@ const LoginModal = (props) => {
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Nome</Text>
                         <Input size={'lg'} borderRadius={'5px'} onChange={(e) => setLogin(e.target.value)}></Input>
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Senha</Text>
-                        <Input size={'lg'} borderRadius={'5px'} onChange={(e) => setPassword(e.target.value)} type={password}></Input>
+                        <Input size={'lg'} borderRadius={'5px'} onChange={(e) => setPassword(e.target.value)}></Input>
                         <Text as={Link} color={'#DB752C'} ml={'13rem'} fontSize={'21px'} fontWeight={'bold'} my={5} mr={0} pl={6} to={'/cadastro'} onClick={onClose} >Esqueceu a senha?</Text>
                         <Button onClick={() => {
-                            props.setIsLogged(true);
                             handleSubmit();
                             onClose();
                         }} bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
