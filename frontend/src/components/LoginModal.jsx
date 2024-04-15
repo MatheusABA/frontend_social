@@ -16,6 +16,9 @@ const LoginModal = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [error, setError] = useState('')
+    const [successMessage, setSuccessMessage] = useState('');
+
     const handleSubmit = async (e) => {
         const user = {login, password};
         var userId = null;
@@ -35,12 +38,14 @@ const LoginModal = (props) => {
             userId = json.userId;
             console.log('Usuario logado com sucesso',json);
             props.setIsLogged(true);        // permitindo o usuario ir a homeLogado caso informações sejam validadas
+            // setSuccessMessage('Login feito com sucesso!')
             navigate("/", { state: { userId: userId } })     // navegar ate a home logada e tentando mandar o userId -> necesario para fazer post
             onClose();
             
         } else {        // nao validado o login retorna para home e com erro ao fazer login no console
             setLogin('');
             setPassword('');
+            // setError('Erro ao fazer login!')
             console.log('Erro ao fazer login')
             navigate('/')
         }
@@ -76,6 +81,8 @@ const LoginModal = (props) => {
                         }} bgColor='#DB752C' color={'white'} width={'100%'} display={'flex'} alignItems={'center'} borderRadius={'3px'} _hover={{'bgColor':'orange.600'}}>
                             <Text fontSize={'1.2rem'}>Entrar</Text>
                         </Button>
+                        {error && <div className='error'><span className='rounded-lg border-2 border-red-400 bg-red-200 p-2'>{error}</span></div>}
+                        {successMessage && <div className='success'><span className='rounded-lg border-2 border-green-400 bg-green-200 p-2'>{successMessage}</span></div>}
                     </Stack>
                 </ModalBody>
                 <ModalFooter justifyContent={'center'} my={3}>

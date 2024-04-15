@@ -17,7 +17,7 @@ const Cadastro = () => {
     const [email, setEmail] = useState('')
     const [password, setSenha] = useState('')
     const [error, setError] = useState('')
-    
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,7 +35,13 @@ const Cadastro = () => {
         const json = await resposta.json();
 
         if(!resposta.ok) {
-            setError(json.error);
+            console.log('Não foi possivel adicioanr o usuário', json)
+            setError('Nao foi possível cadastrar o usuário!');
+
+            // Após 5 segundos, limpa a mensagem de erro
+            setTimeout(() => {
+                setError('');
+            }, 5000);
         }
 
         if (resposta.ok) {
@@ -46,6 +52,12 @@ const Cadastro = () => {
             setEmail('');
             setSenha('');
             console.log('Novo usuario adicionado', json);
+            setSuccessMessage('Novo usuário adicionado com sucesso!');
+
+            // Após 5 segundos, limpa a mensagem de erro
+            setTimeout(() => {
+                setSuccessMessage('');
+            }, 5000);
         }
 
 
@@ -79,7 +91,9 @@ const Cadastro = () => {
 
                     <p className="mt-4 rounded-lg border border-gray-100"></p>
 
-                    
+                    {error && <div className='error text-center'><span className='rounded-lg border-2 border-red-400 bg-red-200 p-2'>{error}</span></div>}
+                    {successMessage && <div className='success text-center'><span className='rounded-lg border-2 border-green-400 bg-green-200 p-2'>{successMessage}</span></div>}
+
                     <form className="create font-bold" method='POST' onSubmit={handleSubmit}>
 
                         <div className=' mt-4'>
@@ -172,7 +186,6 @@ const Cadastro = () => {
                         </div>
                         <br></br>
                         <button className='hover:bg-orange-800 mt-5 p-3 rounded-lg border-2 border-orange-600 bg-orange-600 text-white font-black' type="submit" >Criar minha conta</button>
-                        {error && <div className='error'>{error}</div>}
 
                     </form>
 

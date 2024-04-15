@@ -7,6 +7,10 @@ import { useLocation } from 'react-router-dom';
 
 const UploadDetails = (props) => {
 
+  // flash messages de erro - sucesso
+  const [error, setError] = useState('')
+  const [successMessage, setSuccessMessage] = useState('');
+
   // IMAGEM
   const location = useLocation();
   
@@ -66,8 +70,10 @@ const UploadDetails = (props) => {
     
       if (response.ok) {
         console.log('Postagem feita com sucesso!');
+        setSuccessMessage('Postagem feita com sucesso!')
       } else {
         console.log('Erro ao fazer postagem!')
+        setError('Erro ao fazer postagem!')
       }
 
       
@@ -83,6 +89,8 @@ const UploadDetails = (props) => {
       <h2 className="details-title">Adicionar detalhes</h2>
       <p className="details-description">Fale mais sobre seu trabalho.</p>
       
+      
+
       <div className="flex-container">
         <div className="image-preview-container">
             <img src={image} alt="Imagem Carregada" className="uploaded-image" />
@@ -194,7 +202,10 @@ const UploadDetails = (props) => {
                   <button className="cancel-button">Cancelar</button>
                 </Link>
             </div>
+            {error && <div className='error'><span className='rounded-lg border-2 border-red-400 bg-red-200 p-2'>{error}</span></div>}
+            {successMessage && <div className='success'><span className='rounded-lg border-2 border-green-400 bg-green-200 p-2'>{successMessage}</span></div>}
         </form>
+        
 
       </div>
     </div>
