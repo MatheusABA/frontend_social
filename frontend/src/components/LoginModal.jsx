@@ -73,7 +73,7 @@ const LoginModal = (props) => {
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Nome</Text>
                         <Input size={'lg'} borderRadius={'5px'} onChange={(e) => setLogin(e.target.value)}></Input>
                         <Text fontWeight={'bold'} fontSize={'24px'} my={2}>Senha</Text>
-                        <Input size={'lg'} borderRadius={'5px'} onChange={(e) => setPassword(e.target.value)}></Input>
+                        <Input size={'lg'} borderRadius={'5px'} type={'password'} onChange={(e) => setPassword(e.target.value)}></Input>
                         <Text as={Link} color={'#DB752C'} ml={'13rem'} fontSize={'21px'} fontWeight={'bold'} my={5} mr={0} pl={6} to={'/cadastro'} onClick={onClose} >Esqueceu a senha?</Text>
                         <Button onClick={() => {
                             handleSubmit();

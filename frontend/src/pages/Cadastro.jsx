@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react'
-
+import { MdArrowDropDown } from "react-icons/md"
+import { Checkbox, Select } from '@chakra-ui/react'
+import { IMaskInput } from  'react-imask'
 
 // images
 import imagem_casa from '../images/House-Modern-House-3D-Architectural-Rendering.jpg'
@@ -16,14 +18,18 @@ const Cadastro = () => {
     const [userCpf, setCPF] = useState('')
     const [email, setEmail] = useState('')
     const [password, setSenha] = useState('')
+    const [terms, setTerms] = useState(false)
     const [error, setError] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         const usuario = {nameUser, profileName, accountType, userCpf, email, password}
 
+        
         const resposta = await fetch("http://3.22.240.190:3050/user/create", {
             method: 'POST',
             body: JSON.stringify(usuario),
@@ -35,13 +41,19 @@ const Cadastro = () => {
         const json = await resposta.json();
 
         if(!resposta.ok) {
-            console.log('Não foi possivel adicioanr o usuário', json)
+            console.log('Não foi possivel adicionar o usuário', json)
             setError('Nao foi possível cadastrar o usuário!');
 
-            // Após 5 segundos, limpa a mensagem de erro
             setTimeout(() => {
+                setNome('');
+                setNomePerfil('');
+                setConta('');
+                setCPF('');
+                setEmail('');
+                setSenha('');
                 setError('');
-            }, 5000);
+            }, 2000);
+
         }
 
         if (resposta.ok) {
@@ -56,13 +68,29 @@ const Cadastro = () => {
 
             // Após 5 segundos, limpa a mensagem de erro
             setTimeout(() => {
+                setNome('');
+                setNomePerfil('');
+                setConta('');
+                setCPF('');
+                setEmail('');
+                setSenha('');
                 setSuccessMessage('');
-            }, 5000);
+            }, 2000);
         }
 
 
     }
 
+    const validateEmail = (email) => {
+
+            setEmail(email)
+            return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+
+    };
 
     return (
         <div className="flex justify-between">
@@ -126,26 +154,30 @@ const Cadastro = () => {
                             <label className='text-xl text-light'>Tipo de conta</label>
                         </div>
                         
-                        {/* <div className='w-full'>
-                            <ContaCB/>
-                        </div> */}
 
-                        <input
-                        className="rounded border-2 w-full p-1"
-                        id="conta"
-                        type="text"
-                        onChange={(e) => setConta(e.target.value)}
-                        value={accountType}
-                        />
+                        <Select icon={<MdArrowDropDown/>} variant='outline' spacing={3} placeholder='Selecione um tipo de conta' onChange={(e) => setConta(e.target.value)} value={accountType}>
                         
-                        <sub className='grid font-normal italic pt-2'>Tipos de contas aceitas: <p className="text-light text-gray-400 pt-5">Formando,Graduado, Escritório de Arquitetura, Escritório de Design, Escritório de Engenharia, Escritório do Ramo </p></sub>  
+                        <option className='bold' disabled='true'>Mostrar o meu talento</option>
+                        <option value='Formando'>Formando</option>
+                        <option value='Graduado'>Graduado</option>
+                        <option className='bold' disabled='true'>Em busca de talentos</option>
+                        <option value='Escritório de Arquitetura'>Escritório de Arquitetura</option>
+                        <option value='Escritório de Design'>Escritório de Design</option>
+                        <option value='Escritório de Engenharia'>Escritório de Engenharia</option>
+                        <option value='Escritório do Ramo '>Escritório do Ramo</option>
+
+                        </Select>
+
+                        
+                        {/* <sub className='grid font-normal italic pt-2'>Tipos de contas aceitas: <p className="text-light text-gray-400 pt-5">Formando,Graduado, Escritório de Arquitetura, Escritório de Design, Escritório de Engenharia, Escritório do Ramo </p></sub>   */}
 
                         {/* CPF */}
                         <div className=' mt-4'>
                             <label className="text-xl text-light">CPF</label>
                         </div>
-                        <input
+                        <IMaskInput
                         className="rounded border-2 w-full p-1"
+                        mask="000.000.000-00"
                         id="cpf"
                         type="text"
                         onChange={(e) => setCPF(e.target.value)}
@@ -160,10 +192,11 @@ const Cadastro = () => {
                         className="rounded border-2 w-full p-1"
                         id="email"
                         type="text"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => validateEmail(e.target.value)}
                         value={email}
                         />
-
+                        {/* {emailError && <div className='error text-center'><span className='rounded-lg border-2 border-red-400 bg-red-200 p-2'>{emailError}</span></div>} */}
+                        
 
                         {/* Senha */}
                         <div className=' mt-4'>
@@ -180,12 +213,17 @@ const Cadastro = () => {
                             <sub className='font-light italic'>Mínimo de 6 caracteres</sub>
                         </div>
                         <div>
-                            <input type='checkbox' className='align-middle size-5'/>
+                        <Checkbox size={'lg'} mt={2} isChecked={terms} onChange={() => setTerms(!terms)}></Checkbox>
                             <sub className='font-normal text-base align-baseline'> Ao criar minha conta eu aceito os<sub className="font-normal text-base text-orange-600 align-top"> Termos de Uso</sub> e <sub className='font-normal text-base text-orange-600 align-text-bottom'>Política de Privacidade.</sub>
                             </sub>
                         </div>
                         <br></br>
-                        <button className='hover:bg-orange-800 mt-5 p-3 rounded-lg border-2 border-orange-600 bg-orange-600 text-white font-black' type="submit" >Criar minha conta</button>
+                        {terms ? (
+                            <button className='hover:bg-orange-800 mt-5 p-3 rounded-lg border-2 border-orange-600 bg-orange-600 text-white font-black'>Criar minha conta</button>
+                        ) : (
+                            <button className='mt-5 p-3 rounded-lg border-2 border-gray-600 bg-gray-600 text-white font-black' disabled={true} >Criar minha conta</button>
+                        )}
+                        
 
                     </form>
 
