@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../images/logo-white.png'
 import bgLogoModal from '../images/banter-back.png'
 import { Input, Stack, InputRightElement, Flex, Image, Box, Text, Button ,Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, } from '@chakra-ui/react'
@@ -14,7 +14,6 @@ const LoginModal = (props) => {
 
     // usado para navegar entre paginas e mandar `estados` - 
     const navigate = useNavigate();
-    const location = useLocation();
 
     const [error, setError] = useState('')
     const [successMessage, setSuccessMessage] = useState('');

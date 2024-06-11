@@ -62,7 +62,7 @@ const Navbar = (props) => {
                                     <HStack spacing={5}>
                                         <Text as={Link} to='/pro'bgGradient="linear-gradient(270deg, #FF6A00 0%, #EE2C09 100%)" bgClip='text' fontWeight='bold'>Faça um upgrade, torne-se PRO</Text>
                                         <Avatar size={'md'}/>
-                                        <Avatar bg={'white'}>
+                                        <Avatar bg={'white'} as={Link} to='/profile'>
                                             <IconButton icon={<EmailIcon/>} variant={'ghost'}/>
                                             <AvatarBadge boxSize='1em' bg='tomato' />
                                         </Avatar>
