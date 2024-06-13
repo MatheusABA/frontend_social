@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link as Reactlink } from 'react-router-dom'
 import { Stack, HStack, Flex, Image, Box, Text, Button, Badge, Wrap, WrapItem, Skeleton, IconButton } from '@chakra-ui/react'
+import PostModal from '../components/PostModal'
 
 const Perfil = (props) => {
     props.setIsUpload(false)
@@ -15,9 +16,9 @@ const Perfil = (props) => {
     // }, [])
     
     return (
-        <Flex px={140} py={150}>
+        <HStack px={50} py={'20vh'} spacing={'5vw'} alignItems={'flex-start'}>
             <Skeleton isLoaded={!isLoading}>
-                <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE'>
+                <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE' maxW={'30vw'}>
                     <Image src="https://via.placeholder.com/400x200" alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7} />
                     <Button position="absolute" top='10px' right='10px' zIndex="1"  w={"85px"} h={"40px"} bgColor="#FFFFFF" borderWidth='1' borderColor='#EEEEEE'>
                         Editar
@@ -48,7 +49,11 @@ const Perfil = (props) => {
                     </Stack>
                 </Box>
             </Skeleton>
-        </Flex>
+            <Wrap spacing={10}  maxW={'50vw'}>
+                {/* Realizar o .map para cada post do usuário dentro de um WrapItem alterando o src da Image */}
+                <PostModal />
+            </Wrap>
+        </HStack>
     )
 }
 

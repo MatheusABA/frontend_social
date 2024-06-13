@@ -25,7 +25,7 @@ const Navbar = (props) => {
                     <Box bgColor='white' px={4} >
                         <Flex h={16} alignItems={"center"} justifyContent="space-between">
                             <Flex display={{'base': 'flex', 'md': 'none'}} alignItems={'center'}>
-                                <IconButton bg={'parent'} size={'md'} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} onClick={isOpen ? onClose : onOpen}/>
+                                <IconButton bg={'parent'} size={'md'} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} onClick={isOpen ? onClose : onOpen} />
                             </Flex>
                             <HStack spacing={8} alignItems='center'>
                                 <Box alignItems={'center'} display={'flex'} mx={1}>
@@ -56,12 +56,12 @@ const Navbar = (props) => {
                                 props.isUpload ? (       
                                     <HStack spacing={5}>
                                         <Text as={Link} to='/pro'bgGradient="linear-gradient(270deg, #FF6A00 0%, #EE2C09 100%)" bgClip='text' fontWeight='bold'>Faça um upgrade, torne-se PRO</Text>
-                                        <Avatar size={'md'}/>
+                                        <Avatar as={Link} to={'/profile'} size={'md'}/>
                                     </HStack>
                                 ) : (
                                     <HStack spacing={5}>
                                         <Text as={Link} to='/pro'bgGradient="linear-gradient(270deg, #FF6A00 0%, #EE2C09 100%)" bgClip='text' fontWeight='bold'>Faça um upgrade, torne-se PRO</Text>
-                                        <Avatar size={'md'}/>
+                                        <Avatar as={Link} to={'/profile'} size={'md'}/>
                                         <Avatar bg={'white'} as={Link} to='/profile'>
                                             <IconButton icon={<EmailIcon/>} variant={'ghost'}/>
                                             <AvatarBadge boxSize='1em' bg='tomato' />
