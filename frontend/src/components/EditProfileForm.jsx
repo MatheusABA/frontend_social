@@ -23,15 +23,15 @@ const EditProfileForm = () => {
     }
 
     return (
-        <Stack spacing={4} mt={8}>
-            <Box flex="1" pl={8}>
-            <HStack spacing={4} mb={8}>
-                <Image borderRadius='full' boxSize='100px' src={profileImage} alt='Profile Image' />
-                <Button onClick={sendPhoto} colorScheme='orange'>Alterar foto de perfil</Button>
-                <Button>Deletar</Button>
-                <Button>Desconectar</Button>
-                <input type="file" ref={inputFile} onChange={handleFileUpload} style={{ display: 'none' }} />
-            </HStack>
+        <Stack spacing={4} mt={'5vh'} mx={'5vw'}>
+            <Box flex="1" pl={1}>
+                <HStack spacing={4} mb={8}>
+                    <Image borderRadius='full' boxSize='100px' src={profileImage} alt='Profile Image' />
+                    <Button onClick={sendPhoto} colorScheme='orange'>Alterar foto de perfil</Button>
+                    <Button>Deletar</Button>
+                    <Button ml='20vw'>Desconectar</Button>
+                    <input type="file" ref={inputFile} onChange={handleFileUpload} style={{ display: 'none' }} />
+                </HStack>
             </Box>
             <Box>
                 <Text>Nome</Text>

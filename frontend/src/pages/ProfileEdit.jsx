@@ -14,7 +14,7 @@ const EditProfile = () => {
     const renderContent = () => {
         switch (activeTab) {
             case 'Perfil':
-                return <EditProfileForm ml={2} />;
+                return <EditProfileForm />;
             case 'Senha':
                 return <ChangePasswordForm />;
             case 'Interesses':
@@ -26,17 +26,17 @@ const EditProfile = () => {
     };
 
     return (
-        <Box p={8}>
+        <Box p={8} mr='10'>
             <Heading as="h1" mb={4}>Configurações de perfil</Heading>
             <Text mb={8} color="gray.500">Edite suas informações.</Text>
             <Flex>
-                <VStack align="flex-start" spacing={4} width="250px" borderRight="1px solid #EEEEEE" pr={4}>
-                    <Button variant="ghost" onClick={() => setActiveTab('Perfil')}>Perfil</Button>
-                    <Button variant="ghost" onClick={() => setActiveTab('Senha')}>Senha</Button>
-                    <Button variant="ghost" onClick={() => setActiveTab('Interesses')}>Interesses</Button>
-                    <Button variant="ghost" onClick={() => setActiveTab('Formações')}>Formações</Button>
-                    <Button variant="ghost" onClick={() => setActiveTab('Cursos')}>Cursos</Button>
-                    <Button variant="ghost" onClick={() => setActiveTab('Experiências')}>Experiências</Button>
+                <VStack align="flex-start" spacing={4} width={{base: "100px", lg: "250px"}} borderRight="1px solid #EEEEEE" pr={4}>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Perfil')} colorScheme={activeTab === 'Perfil'? 'orange' : 'gray'}>Perfil</Button>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Senha')} colorScheme={activeTab === 'Senha'? 'orange' : 'gray'}>Senha</Button>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Interesses')} colorScheme={activeTab === 'Interesses'? 'orange' : 'gray'}>Interesses</Button>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Formações')} colorScheme={activeTab === 'Formações'? 'orange' : 'gray'}>Formações</Button>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Cursos')} colorScheme={activeTab === 'Cursos'? 'orange' : 'gray'}>Cursos</Button>
+                    <Button justifyContent='flex-start' w='100%' variant="ghost" onClick={() => setActiveTab('Experiências')} colorScheme={activeTab === 'Experiências'? 'orange' : 'gray'}>Experiências</Button>
                 </VStack>
                 {renderContent()}
             </Flex>

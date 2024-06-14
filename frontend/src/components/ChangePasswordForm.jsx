@@ -3,7 +3,7 @@ import { Box, Button, Input, Stack, Text } from '@chakra-ui/react';
 
 const ChangePasswordForm = () => {
     return (
-        <Stack spacing={4} mt={8}>
+        <Stack spacing={4} mt={'5vh'} mx={'5vw'}>
             <Box>
                 <Text>Senha atual</Text>
                 <Input type="password" placeholder='********' />
