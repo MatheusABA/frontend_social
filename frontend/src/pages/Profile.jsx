@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Link as Reactlink } from 'react-router-dom'
+import { Link as Reactlink, useNavigate } from 'react-router-dom'
 import { Stack, HStack, Flex, Image, Box, Text, Button, Badge, Wrap, WrapItem, Skeleton, IconButton } from '@chakra-ui/react'
 import PostModal from '../components/PostModal'
+import { useRef } from 'react'
+
 
 const Perfil = (props) => {
+
     props.setIsUpload(false)
+    const navigate = useNavigate();
+
 
     const [isLoading, setiIsloading] = useState(false)
 
@@ -14,14 +19,20 @@ const Perfil = (props) => {
     //         second
     //     }
     // }, [])
-    
+
+    const editProfile = (props) => {
+        // const userId = localStorage()
+        navigate(`/editprofile`)
+
+    }
+
     return (
         <HStack px={50} py={'20vh'} spacing={'5vw'} alignItems={'flex-start'}>
             <Skeleton isLoaded={!isLoading}>
                 <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE' maxW={'30vw'}>
-                    <Image src="https://via.placeholder.com/400x200" alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7} />
+                    <Image src="https://via.placeholder.com/200x200" alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7}/>
                     <Button position="absolute" top='10px' right='10px' zIndex="1"  w={"85px"} h={"40px"} bgColor="#FFFFFF" borderWidth='1' borderColor='#EEEEEE'>
-                        Editar
+                        <div className='button' onClick={editProfile}>Editar</div>
                     </Button>
                     <Stack maxW='400px' px='2vh' spacing='5'>
                         <Flex direction='column' justify='space-between' alignItems='center' mt='2'>

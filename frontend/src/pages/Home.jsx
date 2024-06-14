@@ -57,7 +57,7 @@ const Home = (props) => {
                         <div className="absolute grid-cols-2">
                             {/* <div className=""> */}
                                 <h1 className="text-7xl font-semibold my-10 py-20 px-20 text-white col-span-2">Lorem ipsum dolor sit amet,<br></br> conseteur sadipscing elitr.</h1>
-                                <h4 className="text-xl font-normal font-light text-white px-20">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod<br></br>
+                                <h4 className="text-xl font-light text-white px-20">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod<br></br>
                                 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</h4>
                                 <button className="ml-20 my-10 px-14 py-2 font-semibold text-orange-600 rounded border-2 border-white bg-white">
                                     Entrar agora
