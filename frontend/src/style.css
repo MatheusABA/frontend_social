@@ -302,3 +302,89 @@
   font-family: Arial;
 }  
 
+/* --------------- Estilos da Página Cursos --------------------*/
+.courses-presentation {
+  position: relative;
+  background-image: url('images/Casa-Pavilhão-Cena-02.png'); /* Atualize o caminho da imagem */
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.courses-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #db752cd7; /* Laranja translúcido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.courses-overlay h1 {
+  font-size: 50px; /* Ajuste o tamanho conforme necessário */
+  margin: 0;
+  font-weight: bold;
+}
+
+.courses-overlay p {
+  font-size: 30px; /* Ajuste o tamanho conforme necessário */
+  margin: 15px 0 0 0;
+  color: #d6d6d6;
+  max-width: 70%;
+}
+
+.course-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 110px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-right: 20px;
+}
+
+.course-card {
+  background: #e9e9e9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  flex: 1 1 calc(33.333% - 40px); /* Permite que os cartões cresçam para preencher a linha */
+  max-width: calc(33.333% - 40px); /* Garante que os cartões não excedam um terço do contêiner */
+  text-align: left;
+  min-width: 250px;
+}
+
+.course-card img {
+  width: auto;
+  height: auto;
+}
+
+.course-info {
+  padding: 20px;
+}
+
+.video-aula {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 3px;
+  font-size: 24px;
+}
+
+.course-title {
+  font-size: 35px;
+  margin-bottom: 3px;
+  font-weight: bold;
+}
+
+.course-description {
+  color: #969696;
+  font-weight: 400;
+}

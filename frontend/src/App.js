@@ -15,6 +15,7 @@ import UploadDetails  from "./pages/UploadDetails"
 import Profile from './pages/Profile'
 import ProfileEdit from './pages/ProfileEdit'
 import SerProPage from './pages/SerProPage'
+import Courses from './pages/Courses'
 
 // app
 
@@ -36,6 +37,7 @@ const [isUpload, setIsUpload] = useState(false)
               <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
               <Route path="/uploaddetails" element={<UploadDetails />} />
               <Route path="/pro" element={<SerProPage/>}/>
+              <Route path="/courses" element={<Courses/>}/>
             </Routes>
           </div>
         
