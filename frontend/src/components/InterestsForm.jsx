@@ -8,6 +8,8 @@ import InterestsForm from "../components/InterestsForm";
 const EditProfile = () => {
   const [selectedSoftware, setSelectedSoftware] = useState("");
   const [selectedSoftwares, setSelectedSoftwares] = useState([]);
+  const [selectedInteresse, setSelectedInteresse] = useState("");
+  const [selectedInteresses, setSelectedInteresses] = useState([]);
 
   const handleSelectSoftware = (e) => {
     const software = e.target.value;
@@ -16,13 +18,25 @@ const EditProfile = () => {
     }
     setSelectedSoftware(""); // Reset select
   };
+  
+  const handleSelectInteresse = (e) => {
+    const interesse = e.target.value;
+    if (interesse && !selectedInteresses.includes(interesse)) {
+      setSelectedInteresses([...selectedInteresses, interesse]);
+    }
+    setSelectedInteresse(""); // Reset select
+  };
 
   const handleRemoveSoftware = (softwareToRemove) => {
     setSelectedSoftwares(selectedSoftwares.filter((software) => software !== softwareToRemove));
   };
 
-  const renderSelectedSoftwareGroups = () => {
-    return selectedSoftwares.map((software) => (
+  const handleRemoveInteresse = (interesseToRemove) => {
+    setSelectedInteresses(selectedInteresses.filter((interesse) => interesse !== interesseToRemove));
+  };
+
+  const renderSelectedSoftwaresGroups = () => {
+      return selectedSoftwares.map((software) => (
       <ButtonGroup key={software} isAttached variant="outline" mb={2}>
         <Button leftIcon={<img src={`path/to/${software}.png`} alt={software} width="20" />} isDisabled>
           {software}
@@ -33,24 +47,53 @@ const EditProfile = () => {
           onClick={() => handleRemoveSoftware(software)}
         />
       </ButtonGroup>
-    ));
+    ));    
   };
 
+  const renderSelectedInteressesGroups = () => {
+    return selectedInteresses.map((interesse) => (
+        <ButtonGroup key={interesse} isAttached variant="outline" mb={2}>
+          <Button isDisabled>
+            {interesse}
+          </Button>
+          <IconButton
+            aria-label={`Remover ${interesse}`}
+            icon={<CloseIcon />}
+            onClick={() => handleRemoveInteresse(interesse)}
+          />
+        </ButtonGroup>
+      ));
+  };
   return (
     <Box p={8} mr="10">
       <Flex direction={'column'}>
-        <VStack align="flex-start" spacing={4} width={{ base: "100px", lg: "250px" }} borderBottom="1px solid #EEEEEE" pb={4}>
+        <VStack align="flex-start" spacing={4} width={{ base: "100px", lg: "250px" }} pb={4}>
           {/* Select para selecionar softwares */}
           <Select value={selectedSoftware} onChange={handleSelectSoftware}>
             <option value="">Selecione um software</option>
-            <option value="Software1">Software 1</option>
-            <option value="Software2">Software 2</option>
-            <option value="Software3">Software 3</option>
+            <option value="V-Ray">V-Ray</option>
+            <option value="AutoCad">AutoCad</option>
+            <option value="Adobe">Adobe</option>
           </Select>
         </VStack>
         {/* Exibição dos grupos de botões de software selecionados */}
-        <HStack spacing={4} align="flex-start" mt='3'>
-          {renderSelectedSoftwareGroups()}
+        <HStack spacing={4} align="flex-start" my='3' minH='5vh' borderBottom="1px solid #EEEEEE">
+          {renderSelectedSoftwaresGroups('Softwares')}
+        </HStack>
+      </Flex>
+      <Flex direction={'column'}>
+        <VStack align="flex-start" spacing={4} width={{ base: "100px", lg: "250px" }} pb={4}>
+          {/* Select para selecionar Interesses */}
+          <Select value={selectedInteresse} onChange={handleSelectInteresse}>
+            <option value="">Selecione um interesse</option>
+            <option value="Contemporâneo">Contemporâneo</option>
+            <option value="Clássico">Clássico</option>
+            <option value="Moderno">Moderno</option>
+          </Select>
+        </VStack>
+        {/* Exibição dos grupos de botões de software selecionados */}
+        <HStack spacing={4} align="flex-start" mt='3' minH='5vh' borderBottom="1px solid #EEEEEE">
+          {renderSelectedInteressesGroups('Interesses')}
         </HStack>
       </Flex>
     </Box>

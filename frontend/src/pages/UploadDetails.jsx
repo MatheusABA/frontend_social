@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Tag from '../components/Tag'; // Importe o componente Tag
 import logo from '../images/arqnex_rodape.png'
 import { useLocation } from 'react-router-dom';
+import { Box } from '@chakra-ui/react';
 
 const UploadDetails = (props) => {
 
@@ -97,7 +98,7 @@ const UploadDetails = (props) => {
             <div className="attachments-title">
               <span className="attachments-style">Anexos</span> <span className="pro-style">PRO</span>
             </div>
-            <div className="additional-images-container">
+            <Box className="additional-images-container" as={Link} to='/pro'>
               {/** FALTA ADICIOANR LOGICA PARA OS PROS */}
             <div className="additional-image">
                 <span class="material-icons icon-photo">image</span>
@@ -115,7 +116,7 @@ const UploadDetails = (props) => {
                 <span class="material-icons icon-photo">image</span>
             </div>
             
-            </div>
+            </Box>
         </div>
 
         <form className="create form-container" method='POST' onSubmit={handleSubmit}>
