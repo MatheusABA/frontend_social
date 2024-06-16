@@ -16,6 +16,7 @@ import Profile from './pages/Profile'
 import ProfileEdit from './pages/ProfileEdit'
 import SerProPage from './pages/SerProPage'
 import Courses from './pages/Courses'
+import Live from './pages/Live'
 
 // app
 
@@ -38,6 +39,7 @@ const [isUpload, setIsUpload] = useState(false)
               <Route path="/uploaddetails" element={<UploadDetails />} />
               <Route path="/pro" element={<SerProPage/>}/>
               <Route path="/courses" element={<Courses/>}/>
+              <Route path="/live" element={<Live/>}/>
             </Routes>
           </div>
         

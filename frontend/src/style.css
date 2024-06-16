@@ -388,3 +388,136 @@
   color: #969696;
   font-weight: 400;
 }
+
+/* -------------- Estilo Live --------------*/
+.lives-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.left-section {
+  width: 60%;
+}
+
+.left-section h1{
+  font-size: 31px;
+  padding-bottom: 30px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  width: 90%;
+  text-align: center;
+}
+
+.right-section {
+  width: 31%;
+  position: relative;
+  background-image: url('images/photo-1564659318400-669837b066ba.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+}
+
+.video-thumbnail {
+  width: 90%;
+  height: auto;
+  display: block;
+}
+
+.video-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 20%; /* Ajuste a altura conforme necessário */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  pointer-events: none; /* Permite clicar no vídeo através do pseudo-elemento */
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1d252cd3;
+  width: 100px;
+  height: 70px;
+  border: none;
+  font-size: 2em;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.overlay {
+  background: #db752cd7; /* Laranja translúcido */
+  height: 100%;
+  padding: 20px;
+  color: white;
+}
+
+.overlay h2 {
+  font-size: 18px;
+  color: #1d252c52;
+  font-weight: 600;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+.overlay h3 {
+  font-size: 30px;
+  padding-left: 10px;
+  padding-top: 0;
+  font-weight: bold;
+  max-width: 51%;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  padding-bottom: 10px;
+}
+
+.lives-schedule {
+  margin-top: 25px;
+}
+
+.live-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+.live-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.live-date {
+  font-weight: bold;
+}
+
+.live-detail {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.logo {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  width: auto;
+  height: 22px;
+}
