@@ -94,6 +94,7 @@ const InterestsForm = () => {
           {renderSelectedInteressesGroups('Interesses')}
         </HStack>
       </Flex>
+      <Button mt={2} colorScheme='orange' minW={'20vw'} maxW={'20vw'}>Salvar</Button>
     </Box>
   );
 };

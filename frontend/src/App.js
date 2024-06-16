@@ -35,7 +35,7 @@ const [isUpload, setIsUpload] = useState(false)
               <Routes>
                 <Route path="/" element={isLogged ? <HomeLogged isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
                 <Route path="/profile" element={isLogged ? <Profile isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-                <Route path='/editprofile' element={isLogged ? <ProfileEdit isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+                <Route path='/editprofile' element={isLogged ? <ProfileEdit isUpload={isUpload} setIsUpload={setIsUpload} isLogged={isLogged} setIsLogged={setIsLogged} /> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
                 <Route path="/uploaddetails" element={<UploadDetails />} />

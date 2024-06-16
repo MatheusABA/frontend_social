@@ -19,7 +19,7 @@ const PostModal = (props) => {
     return (
         <>
             <WrapItem >
-                <Box borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={200} h={200} onClick={onOpen}>
+                <Box borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={250} h={250} onClick={onOpen}>
                     <Image src='../images/image_1.png' objectFit={'cover'} borderTopRadius={7} />    
                 </Box>
             </WrapItem>

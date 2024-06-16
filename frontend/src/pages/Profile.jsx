@@ -65,8 +65,15 @@ const Perfil = (props) => {
                     </Stack>
                 </Box>
             </Skeleton>
-            <Wrap spacing={10}  maxW={'50vw'}>
+            <Wrap spacing={10}  maxW={'70vw'}>
                 {/* Realizar o .map para cada post do usuário dentro de um WrapItem alterando o src da Image */}
+                <PostModal />
+                <PostModal />
+                <PostModal />
+                <PostModal />
+                <PostModal />
+                <PostModal />
+                <PostModal />
                 <PostModal />
             </Wrap>
         </HStack>

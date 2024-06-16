@@ -18,25 +18,29 @@ const Courses = (props) => {
       id: 1,
       image: autocad, // Substitua pelo caminho real da imagem
       title: 'Autodesk Autocad',
-      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam'
+      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam',
+      link: 'https://www.youtube.com/@autocad'
     },
     {
       id: 2,
       image: vray, // Substitua pelo caminho real da imagem
       title: 'Fotorealismo V-Ray 3.4',
-      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam'
+      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam',
+      link: 'https://youtu.be/0dPqoozbkn8?si=qGXFrPuuKv2wPctH'
     },
     {
       id: 3,
       image: sketchup, // Substitua pelo caminho real da imagem
       title: 'Sketchup',
-      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam'
+      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam',
+      link: 'https://www.youtube.com/@SketchUp'
     },
     {
       id: 4,
       image: pos3d, // Substitua pelo caminho real da imagem
       title: 'Pós-Produção em 3D',
-      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam'
+      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyyam erat, sed diam',
+      link: 'https://youtu.be/SfWwrLOP4Ao?si=eEWearpu7R3EQtg8'
     }
   ];
 
@@ -53,7 +57,9 @@ const Courses = (props) => {
     <div className="course-container">
         {courses.map((course) => (
           <div key={course.id} className="course-card">
-            <img src={course.image} alt={course.title} />
+            <a href={course.link} target='blank'>
+              <img src={course.image} alt={course.title}/>
+            </a>
             <div className="course-info">
               <p className="video-aula">Vídeo Aula</p>
               <h2 className="course-title">{course.title}</h2>

@@ -1,8 +1,9 @@
 import React, { useRef, useContext } from 'react';
 import { Box, Button, Input, Textarea, HStack, Image, Stack, Text } from '@chakra-ui/react';
 import { UserProfileContext } from './UserProfileContext';
+import { redirect } from 'react-router-dom';
 
-const EditProfileForm = () => {
+const EditProfileForm = (props) => {
     const inputFile = useRef(null);
     const { profileImage, setProfileImage } = useContext(UserProfileContext);
 
@@ -16,6 +17,11 @@ const EditProfileForm = () => {
             reader.readAsDataURL(file);
         }
     }
+    
+    const handleLogout = () => {
+        props.setIsLogged(false);
+        redirect("/")
+    };
 
     const sendPhoto = () => {
         inputFile.current.click();
@@ -36,7 +42,7 @@ const EditProfileForm = () => {
                     <Image borderRadius='full' boxSize='100px' src={profileImage} alt='Profile Image' />
                     <Button onClick={sendPhoto} colorScheme='orange'>Alterar foto de perfil</Button>
                     <Button>Deletar</Button>
-                    <Button ml='20vw' onClick={logout}>Desconectar</Button>
+                    <Button ml='20vw' onClick={() => {handleLogout()}}>Desconectar</Button>
                     <input type="file" ref={inputFile} onChange={handleFileUpload} style={{ display: 'none' }} />
                 </HStack>
             </Box>

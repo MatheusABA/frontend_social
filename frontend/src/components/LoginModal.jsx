@@ -21,7 +21,7 @@ const LoginModal = (props) => {
     const handleSubmit = async (e) => {
         const user = {login, password};
         var userId = null;
-        const resposta = await fetch("http://3.22.240.190:3050/user/login", {
+        const resposta = await fetch("http://3.12.149.2:3050/user/login", {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {

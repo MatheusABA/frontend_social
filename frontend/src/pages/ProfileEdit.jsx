@@ -4,17 +4,15 @@ import EditProfileForm from '../components/EditProfileForm';
 import ChangePasswordForm from '../components/ChangePasswordForm';
 import InterestsForm from '../components/InterestsForm';
 
-const EditProfile = () => {
+const EditProfile = (props) => {
 
 
     const [activeTab, setActiveTab] = useState('Perfil');
 
-
-
     const renderContent = () => {
         switch (activeTab) {
             case 'Perfil':
-                return <EditProfileForm />;
+                return <EditProfileForm isLogged={props.isLogged} setIsLogged={props.setIsLogged} />;
             case 'Senha':
                 return <ChangePasswordForm />;
             case 'Interesses':

@@ -61,9 +61,6 @@ const Navbar = (props) => {
                                     <IconButton icon={<EmailIcon />} variant={'ghost'} />
                                     <AvatarBadge boxSize='1em' bg='tomato' />
                                 </Avatar>
-                                <Button colorScheme='red' onClick={() => {
-                                    props.setIsLogged(false)
-                                }}>Logout</Button>
                             </HStack>
                         )
                     )}
