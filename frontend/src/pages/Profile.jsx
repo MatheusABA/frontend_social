@@ -36,8 +36,8 @@ const Perfil = (props) => {
             <Skeleton isLoaded={!isLoading}>
                 <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE' maxW={'30vw'}>
                     <Image src={profileImage}  alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7}/>
-                    <Button position="absolute" top='10px' right='10px' zIndex="1"  w={"85px"} h={"40px"} bgColor="#FFFFFF" borderWidth='1' borderColor='#EEEEEE'>
-                        <div className='button' onClick={editProfile}>Editar</div>
+                    <Button position="absolute" top='10px' right='10px' zIndex="1"  w={"85px"} h={"40px"} bgColor="#FFFFFF" borderWidth='1' borderColor='#EEEEEE' onClick={editProfile}>
+                        Editar
                     </Button>
                     <Stack maxW='400px' px='2vh' spacing='5'>
                         <Flex direction='column' justify='space-between' alignItems='center' mt='2'>

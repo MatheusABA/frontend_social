@@ -34,8 +34,8 @@ const HomeLogged = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // var userId = location.state?.userId;
-  // console.log(userId);
+  var userId = location.state?.userId;
+  console.log(userId);
 
   // Obtém o token do localStorage
   const token = getToken();

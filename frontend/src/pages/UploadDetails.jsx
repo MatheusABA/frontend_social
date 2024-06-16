@@ -2,31 +2,29 @@ import { React, useState } from 'react';
 import '../style.css'; // Nome do arquivo CSS que você criará para estilizar esta página
 import { Link } from 'react-router-dom'
 import Tag from '../components/Tag'; // Importe o componente Tag
+import { Box, Button, Input, Textarea, HStack, Image, Stack, Text, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import logo from '../images/arqnex_rodape.png'
 import { useLocation } from 'react-router-dom';
-import { Box } from '@chakra-ui/react';
 
 const UploadDetails = (props) => {
 
-  // flash messages de erro - sucesso
-  const [error, setError] = useState('')
-  const [successMessage, setSuccessMessage] = useState('');
+  const toast = useToast();
 
   // IMAGEM
   const location = useLocation();
-  
   const { image, token } = location.state;
-  console.log(token)
+  console.log(token);
+
   // DADOS ENVIADOS
   const [formData, setFormData] = useState({
-    userId: token,
+    imagePost: image,
     titlePost:'',
     softwares: '',
     styles: '',
     projects: '',
     types: '',
     descriptionPost: '',
-    imagePost: image
+    userId: 1,
   });
 
   const handleInputChange = (e) => {
@@ -42,23 +40,48 @@ const UploadDetails = (props) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://3.12.149.2:3050/user/post', {
+      // Enviar a imagem primeiro
+      const formDataImage = new FormData();
+      formDataImage.append('image', image);
+
+      const responseImage = await fetch('http://3.12.149.2:3050/user/post', {
+        method: 'POST',
+        body: formDataImage,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!responseImage.ok) {
+        console.log()
+      }
+
+      const imageData = await responseImage.json();
+      const imageUrl = imageData.url;
+
+      // Em seguida, enviar o JSON com as informações
+      const responseJson = await fetch('http://3.12.149.2:3050/user/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
+
         body: JSON.stringify({
-          userId: token,
+          userId: 1,
           titlePost: formData.titlePost,
           softwares: formData.softwares,
           styles: formData.styles,
           projects: formData.projects,
           types: formData.types,
           descriptionPost: formData.descriptionPost,
-          imagePost: image
+          // pathImage: image,
         }),
-        
       });
+
+      if (!responseJson.ok) {
+        throw new Error('Erro ao enviar o JSON com as informações');
+      }
 
       console.log('userId:', token);
       console.log('titlePost:', formData.titlePost);
@@ -69,17 +92,23 @@ const UploadDetails = (props) => {
       console.log('descriptionPost:', formData.descriptionPost);
       console.log('imagePost:', image);
     
-      if (response.ok) {
-        console.log('Postagem feita com sucesso!');
-        setSuccessMessage('Postagem feita com sucesso!')
-      } else {
-        console.log('Erro ao fazer postagem!')
-        setError('Erro ao fazer postagem!')
-      }
-
+      toast({
+        title: "Postagem feita com sucesso.",
+        description: "",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      
       
     } catch (error) {
-      console.error('Erro:', error);
+      toast({
+        title: "Erro ao fazer a postagem",
+        description: "",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+    })
     }
   };
 
@@ -94,7 +123,7 @@ const UploadDetails = (props) => {
 
       <div className="flex-container">
         <div className="image-preview-container">
-            <img src={image} alt="Imagem Carregada" className="uploaded-image" />
+            <img name='image' src={image} alt="Imagem Carregada" className="uploaded-image" />
             <div className="attachments-title">
               <span className="attachments-style">Anexos</span> <span className="pro-style">PRO</span>
             </div>
@@ -203,8 +232,7 @@ const UploadDetails = (props) => {
                   <button className="cancel-button">Cancelar</button>
                 </Link>
             </div>
-            {error && <div className='error'><span className='rounded-lg border-2 border-red-400 bg-red-200 p-2'>{error}</span></div>}
-            {successMessage && <div className='success'><span className='rounded-lg border-2 border-green-400 bg-green-200 p-2'>{successMessage}</span></div>}
+            
         </form>
         
 
