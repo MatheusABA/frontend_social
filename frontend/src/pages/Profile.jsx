@@ -26,6 +26,11 @@ const Perfil = (props) => {
 
     }
 
+
+    const getUserData = () => {
+        // puxa informações do BD
+    }
+
     return (
         <HStack px={50} py={'20vh'} spacing={'5vw'} alignItems={'flex-start'}>
             <Skeleton isLoaded={!isLoading}>
@@ -40,10 +45,10 @@ const Perfil = (props) => {
                                 Nome Usuário
                             </Text>
                             <Text fontSize="24px" fontWeight="medium" color="#1D252C61">
-                                Campo Grande, MS
+                                Cidade
                             </Text>
                             <Text fontSize="20px" fontWeight="regular" color="#1D252C" textAlign='center' pt='10'>
-                                Lorem ipsum dolor sit aconsetetur sadipscing elitr, sedumy eirmod tempor invidunt ut labore et dolore magna aliquyam amet alere
+                                Biografia do Usuario
                             </Text>
                         </Flex>
                     </Stack>

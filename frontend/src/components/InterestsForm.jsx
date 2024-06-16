@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Box, Flex, VStack, HStack, Text, ButtonGroup, IconButton, Select, Button } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
-import EditProfileForm from "../components/EditProfileForm";
-import ChangePasswordForm from "../components/ChangePasswordForm";
-import InterestsForm from "../components/InterestsForm";
 
-const EditProfile = () => {
+
+const InterestsForm = () => {
   const [selectedSoftware, setSelectedSoftware] = useState("");
   const [selectedSoftwares, setSelectedSoftwares] = useState([]);
   const [selectedInteresse, setSelectedInteresse] = useState("");
@@ -100,4 +98,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default InterestsForm;

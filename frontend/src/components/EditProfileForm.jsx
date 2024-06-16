@@ -22,6 +22,14 @@ const EditProfileForm = () => {
         inputFile.current.click();
     }
 
+    const logout = () => {
+
+    }
+
+    const handleSubmit = () => {
+        
+    }
+
     return (
         <Stack spacing={4} mt={'5vh'} mx={'5vw'}>
             <Box flex="1" pl={1}>
@@ -29,7 +37,7 @@ const EditProfileForm = () => {
                     <Image borderRadius='full' boxSize='100px' src={profileImage} alt='Profile Image' />
                     <Button onClick={sendPhoto} colorScheme='orange'>Alterar foto de perfil</Button>
                     <Button>Deletar</Button>
-                    <Button ml='20vw'>Desconectar</Button>
+                    <Button ml='20vw' onClick={logout}>Desconectar</Button>
                     <input type="file" ref={inputFile} onChange={handleFileUpload} style={{ display: 'none' }} />
                 </HStack>
             </Box>
