@@ -2,23 +2,26 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../style.css'; // Certifique-se de criar um arquivo CSS correspondente
 import uploadIcon from '../images/upload.png';
+import { getToken } from '../api/auth';
 
 const Upload = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const userId = location.state?.userId;
-  console.log(userId);
+  const token = getToken();
+  console.log(token)
+  
 
   const handleUpload = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setSelectedFile(reader.result);
+      // const token = getToken();
       navigate(
         "/uploaddetails",
-        { state: { image: reader.result, userId: userId } }
+        { state: { image: reader.result, token: token } }
       );
     };
   };

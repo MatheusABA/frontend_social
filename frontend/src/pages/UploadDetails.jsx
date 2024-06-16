@@ -15,11 +15,11 @@ const UploadDetails = (props) => {
   // IMAGEM
   const location = useLocation();
   
-  const { image, userId } = location.state;
-  console.log(userId)
+  const { image, token } = location.state;
+  console.log(token)
   // DADOS ENVIADOS
   const [formData, setFormData] = useState({
-    userId: userId,
+    userId: token,
     titlePost:'',
     softwares: '',
     styles: '',
@@ -42,13 +42,13 @@ const UploadDetails = (props) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://3.22.240.190:3050/user/post', {
+      const response = await fetch('http://3.12.149.2:3050/user/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: userId,
+          userId: token,
           titlePost: formData.titlePost,
           softwares: formData.softwares,
           styles: formData.styles,
@@ -60,7 +60,7 @@ const UploadDetails = (props) => {
         
       });
 
-      console.log('userId:', userId);
+      console.log('userId:', token);
       console.log('titlePost:', formData.titlePost);
       console.log('softwares:', formData.softwares);
       console.log('styles:', formData.styles);

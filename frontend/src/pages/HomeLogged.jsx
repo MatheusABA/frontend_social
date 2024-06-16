@@ -1,6 +1,6 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-
+import { getToken } from "../api/auth"
 
 //components
 import logo from '../images/arqnex_rodape.png'
@@ -34,14 +34,24 @@ const HomeLogged = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  var userId = location.state?.userId;
-  console.log(userId);
+  // var userId = location.state?.userId;
+  // console.log(userId);
+
+  // Obtém o token do localStorage
+  const token = getToken();
+  console.log(token)
+  useEffect(() => {
+      if (!token) {
+          // Se não houver token, redireicona para a página de login
+          navigate('/');
+      }
+  }, [token, navigate]);
 
   props.setIsUpload(false);
 
 
   const handleClick = () => {
-    navigate('/upload', { state: { userId: userId}})
+    navigate('/upload', { state: { token: token}})
   }
 
     return(

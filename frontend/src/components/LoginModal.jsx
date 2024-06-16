@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from '../images/logo-white.png'
 import bgLogoModal from '../images/banter-back.png'
 import { Input, Stack, InputRightElement, Flex, Image, Box, Text, Button ,Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, } from '@chakra-ui/react'
-
+import { setToken } from '../api/auth'
 
 
 const LoginModal = (props) => {
@@ -12,7 +12,6 @@ const LoginModal = (props) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
-    // usado para navegar entre paginas e mandar `estados` - 
     const navigate = useNavigate();
 
     const [error, setError] = useState('')
@@ -20,7 +19,7 @@ const LoginModal = (props) => {
 
     const handleSubmit = async (e) => {
         const user = {login, password};
-        var userId = null;
+
         const resposta = await fetch("http://3.12.149.2:3050/user/login", {
             method: 'POST',
             body: JSON.stringify(user),
@@ -30,21 +29,22 @@ const LoginModal = (props) => {
         })
 
         const json = await resposta.json();
+        
+        // console.log(json.token)  
 
         if (resposta.ok) {
             setLogin('');
             setPassword('');
-            userId = json.userId;
-            console.log('Usuario logado com sucesso',json);
-            props.setIsLogged(true);        // permitindo o usuario ir a homeLogado caso informações sejam validadas
-            // setSuccessMessage('Login feito com sucesso!')
-            navigate("/", { state: { userId: userId } })     // navegar ate a home logada e tentando mandar o userId -> necesario para fazer post
+            const token = json.token;
+            setToken(token)     // armazenando token no localstorage
+            console.log('Usuario logado com sucesso', json);
+            props.setIsLogged(true);
+            navigate("/", { state: { userId: json.userId } });
             onClose();
             
-        } else {        // nao validado o login retorna para home e com erro ao fazer login no console
+        } else {
             setLogin('');
             setPassword('');
-            // setError('Erro ao fazer login!')
             console.log('Erro ao fazer login')
             navigate('/')
         }
