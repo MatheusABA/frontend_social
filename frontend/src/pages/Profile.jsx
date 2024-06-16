@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link as Reactlink, useNavigate } from 'react-router-dom'
 import { Stack, HStack, Flex, Image, Box, Text, Button, Badge, Wrap, WrapItem, Skeleton, IconButton } from '@chakra-ui/react'
 import PostModal from '../components/PostModal'
-import { useRef } from 'react'
+import { UserProfileContext } from '../components/UserProfileContext';
 
 
 const Perfil = (props) => {
 
     props.setIsUpload(false)
     const navigate = useNavigate();
-
+    const { profileImage } = useContext(UserProfileContext);
 
     const [isLoading, setiIsloading] = useState(false)
 
@@ -35,7 +35,7 @@ const Perfil = (props) => {
         <HStack px={50} py={'20vh'} spacing={'5vw'} alignItems={'flex-start'}>
             <Skeleton isLoaded={!isLoading}>
                 <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE' maxW={'30vw'}>
-                    <Image src="https://via.placeholder.com/200x200" alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7}/>
+                    <Image src={profileImage}  alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7}/>
                     <Button position="absolute" top='10px' right='10px' zIndex="1"  w={"85px"} h={"40px"} bgColor="#FFFFFF" borderWidth='1' borderColor='#EEEEEE'>
                         <div className='button' onClick={editProfile}>Editar</div>
                     </Button>
@@ -48,7 +48,7 @@ const Perfil = (props) => {
                                 Cidade
                             </Text>
                             <Text fontSize="20px" fontWeight="regular" color="#1D252C" textAlign='center' pt='10'>
-                                Biografia do Usuario
+                                Biografia
                             </Text>
                         </Flex>
                     </Stack>

@@ -17,6 +17,7 @@ import ProfileEdit from './pages/ProfileEdit'
 import SerProPage from './pages/SerProPage'
 import Courses from './pages/Courses'
 import Live from './pages/Live'
+import { UserProfileProvider } from './components/UserProfileContext'
 
 // app
 
@@ -27,23 +28,24 @@ const [isUpload, setIsUpload] = useState(false)
 
   return (
     <ChakraProvider>
-      <BrowserRouter>
-          <Navbar isLogged={isLogged} setIsLogged={setIsLogged} isUpload={isUpload} setIsUpload={setIsUpload}/>
-          <div className="pages">
-            <Routes>
-              <Route path="/" element={isLogged ? <HomeLogged isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-              <Route path="/profile" element={isLogged ? <Profile isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-              <Route path='/editprofile' element={isLogged ? <ProfileEdit isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
-              <Route path="/uploaddetails" element={<UploadDetails />} />
-              <Route path="/pro" element={<SerProPage/>}/>
-              <Route path="/courses" element={<Courses/>}/>
-              <Route path="/live" element={<Live/>}/>
-            </Routes>
-          </div>
-        
-      </BrowserRouter>
+      <UserProfileProvider>
+        <BrowserRouter>
+            <Navbar isLogged={isLogged} setIsLogged={setIsLogged} isUpload={isUpload} setIsUpload={setIsUpload}/>
+            <div className="pages">
+              <Routes>
+                <Route path="/" element={isLogged ? <HomeLogged isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+                <Route path="/profile" element={isLogged ? <Profile isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+                <Route path='/editprofile' element={isLogged ? <ProfileEdit isUpload={isUpload} setIsUpload={setIsUpload}/> : <Home isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/upload" element={<Upload isUpload={isUpload} setIsUpload={setIsUpload}/>} />
+                <Route path="/uploaddetails" element={<UploadDetails />} />
+                <Route path="/pro" element={<SerProPage/>}/>
+                <Route path="/courses" element={<Courses/>}/>
+                <Route path="/live" element={<Live/>}/>
+              </Routes>
+            </div>
+        </BrowserRouter>
+      </UserProfileProvider>
     </ChakraProvider>
       
   );
