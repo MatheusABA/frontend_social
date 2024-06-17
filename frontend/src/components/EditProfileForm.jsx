@@ -27,7 +27,7 @@ const EditProfileForm = (props) => {
         city: '',
         telephone: '',
         biography: '',
-        photo: ''
+        // photo: ''
     });
 
 
@@ -61,13 +61,13 @@ const EditProfileForm = (props) => {
 
             const response = await axios.get('http://3.12.149.2:3050/user/info-profile/', {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `${token}`
                 }
             });
 
             console.log('Resposta:', response)
 
-            const userData = response.data;
+            const userData = response.data.user;
             
             console.log("Dados do Usuario:", userData);
 
@@ -113,12 +113,15 @@ const EditProfileForm = (props) => {
                 city: formData.city,
                 telephone: formData.telephone,
                 biography: formData.biography,
-                photo: formData.photo
+                // photo: formData.photo,
             };
 
-            await axios.post('http://3.12.149.2:3050/user/info-profile', formDataToSend, {
+            console.log(formDataToSend)
+
+            await axios.put('http://3.12.149.2:3050/user/update', formDataToSend, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    "Content-Type": "application/json",
+                    Authorization: `${token}`
                 }
             });
 

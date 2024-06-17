@@ -35,13 +35,47 @@ const UploadDetails = () => {
     })
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = getToken();
+    try {
+      const formDataAll = new FormData();
+      formDataAll.append('image', image);
+      Object.keys(formData).forEach(key => formDataAll.append(key, formData[key]));
+
+      const response = await axios.post('http://3.12.149.2:3050/user/post', formDataAll, {
+        headers: {  
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${token}`,
+        },
+      });
+
+      if (response.ok) {
+        toast({
+        title: "Postagem feita com sucesso.",
+        description: "",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      })}
+
+    } catch (error) {
+      toast({
+        title: "Erro ao fazer a postagem",
+        description: "",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
+
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const token = getToken();
   //   try {
   //     const formDataAll = new FormData();
-  //     formDataAll.append('token', token);
   //     formDataAll.append('image', image);
   //     formDataAll.append('titlePost', formData.titlePost);
   //     formDataAll.append('softwares', formData.softwares);
@@ -50,12 +84,12 @@ const UploadDetails = () => {
   //     formDataAll.append('types', formData.types);
   //     formDataAll.append('descriptionPost', formData.descriptionPost);
   //     formDataAll.append('userId', formData.userId);
-  
+  //     console.log(formDataAll)
   //     const response = await axios.post('http://3.12.149.2:3050/user/post', {
   //       // method: 'POST',
-  //       body: formDataAll,
+  //       body: formDataAll.values,
   //       headers: {
-  //         'Authorization': `Bearer ${token}`,
+  //         'Authorization': `${token}`,
   //       },
   //     });
   
@@ -83,31 +117,31 @@ const UploadDetails = () => {
 
 
   // enviando primeiro imagem, logo apos o json
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = getToken();
-    try {
-      // Envia a imagem primeiro
-      const formDataImage = new FormData();
-      formDataImage.append('image', image);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const token = getToken();
+  //   try {
+  //     // Envia a imagem primeiro
+  //     const formDataImage = new FormData();
+  //     formDataImage.append('image', image);
 
-      const responseImage = await fetch('http://3.12.149.2:3050/user/post', {
-        method: 'POST',
-        files: formDataImage,
-        body: JSON.stringify(...formData),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `${token}`,
-        },
-      });
+  //     const responseImage = await fetch('http://3.12.149.2:3050/user/post', {
+  //       method: 'POST',
+  //       files: formDataImage,
+  //       body: JSON.stringify(...formData),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `${token}`,
+  //       },
+  //     });
 
-      if (!responseImage.ok) {
-        throw new Error('Erro durante o envio da imagem!')
-      }
+  //     if (!responseImage.ok) {
+  //       throw new Error('Erro durante o envio da imagem!')
+  //     }
 
-      if (responseImage.ok) {
-        console.log('Imagem recebida')
-      }
+  //     if (responseImage.ok) {
+  //       console.log('Imagem recebida')
+  //     }
 
       // caminho da imagem
       // const imageData = await responseImage.json();
@@ -143,25 +177,25 @@ const UploadDetails = () => {
 
 
     
-      toast({
-        title: "Postagem feita com sucesso.",
-        description: "",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+  //     toast({
+  //       title: "Postagem feita com sucesso.",
+  //       description: "",
+  //       status: "success",
+  //       duration: 5000,
+  //       isClosable: true,
+  //     });
       
       
-    } catch (error) {
-      toast({
-        title: "Erro ao fazer a postagem",
-        description: "",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-    })
-    }
-  };
+  //   } catch (error) {
+  //     toast({
+  //       title: "Erro ao fazer a postagem",
+  //       description: "",
+  //       status: "error",
+  //       duration: 5000,
+  //       isClosable: true,
+  //   })
+  //   }
+  // };
 
 
   return (
