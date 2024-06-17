@@ -24,7 +24,7 @@ import { getToken } from './api/auth'
 
 function App() {
 
-const [isLogged, setIsLogged] = useState(true)
+const [isLogged, setIsLogged] = useState()
 const [isUpload, setIsUpload] = useState(false)
 
 useEffect(() => {
