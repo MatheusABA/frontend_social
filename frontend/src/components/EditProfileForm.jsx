@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Box, Button, Input, Textarea, HStack, Image, Stack, Text, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { UserProfileContext } from './UserProfileContext';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../api/auth';
+import { getToken, removeToken } from '../api/auth';
 
 const EditProfileForm = (props) => {
     const inputFile = useRef(null);
@@ -45,6 +45,7 @@ const EditProfileForm = (props) => {
     };
 
     const handleLogout = () => {
+        removeToken();
         props.setIsLogged(false);
         navigate("/");
     };

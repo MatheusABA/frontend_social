@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ChakraProvider } from  '@chakra-ui/react'
 import { React } from  'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 // pages & components
@@ -18,6 +18,7 @@ import SerProPage from './pages/SerProPage'
 import Courses from './pages/Courses'
 import Live from './pages/Live'
 import { UserProfileProvider } from './components/UserProfileContext'
+import { getToken } from './api/auth'
 
 // app
 
@@ -25,6 +26,13 @@ function App() {
 
 const [isLogged, setIsLogged] = useState(true)
 const [isUpload, setIsUpload] = useState(false)
+
+useEffect(() => {
+  const token = getToken();
+  if (token) {
+    setIsLogged(true);
+  }
+}, []);
 
   return (
     <ChakraProvider>
