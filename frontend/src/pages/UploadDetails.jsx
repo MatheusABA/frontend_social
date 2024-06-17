@@ -42,8 +42,8 @@ const UploadDetails = () => {
       const formDataAll = new FormData();
       formDataAll.append('image', image);
       Object.keys(formData).forEach(key => formDataAll.append(key, formData[key]));
-
-      const response = await axios.post('http://3.12.149.2:3050/user/post', formDataAll, {
+      formDataAll.forEach((e) => console.log(e))
+      const response = await axios.post('http://18.117.170.99:3050/user/post', formDataAll, {
         headers: {  
           'Content-Type': 'multipart/form-data',
           'Authorization': `${token}`,
@@ -57,7 +57,19 @@ const UploadDetails = () => {
         status: "success",
         duration: 5000,
         isClosable: true,
-      })}
+      })
+    
+    } else {
+      toast({
+        title: "Erro ao fazer a postagem",
+        description: "",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+
+      
 
     } catch (error) {
       toast({

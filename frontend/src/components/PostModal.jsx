@@ -19,7 +19,7 @@ const PostModal = (props) => {
     return (
         <>
             <WrapItem >
-                <Box borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={250} h={250} onClick={onOpen}>
+                <Box borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={250} h={250} onClick={onOpen} _hover={{cursor: 'pointer'}}>
                     <Image src='../images/image_1.png' objectFit={'cover'} borderTopRadius={7} />    
                 </Box>
             </WrapItem>
@@ -30,16 +30,8 @@ const PostModal = (props) => {
                 <Box backgroundSize="cover" backgroundPosition="center" w={'100%'} h={250} display={"flex"} alignItems="center" justifyContent="center" borderTopRadius="5px">
                     <Image src={'../images/image_1.png'} />
                 </Box>
-                <ModalBody p={4}>
-                    <Flex justifyContent={'space-evenly'} my={'15px'}>
-                        <Button colorScheme='facebook' w={'15rem'} mx={1}>Facebook</Button>
-                        <Button colorScheme='twitter' w={'15rem'} mx={1}>Google</Button>
-                    </Flex>
-                </ModalBody>
-                <ModalFooter justifyContent={'center'} my={3}>
-                    <Text color={'#1D252C3D'} mr={'0.25rem'}>Novo por aqui?</Text>
-                    <Text as={Link} to={'/cadastro'} onClick={onClose} fontWeight={'bold'}>Criar conta</Text>
-                </ModalFooter>
+
+
             </ModalContent>
             </Modal>
     </>

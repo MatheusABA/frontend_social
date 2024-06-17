@@ -59,7 +59,7 @@ const EditProfileForm = (props) => {
             const token = getToken();
             console.log("Token:", token);
 
-            const response = await axios.get('http://3.12.149.2:3050/user/info-profile/', {
+            const response = await axios.get('http://18.117.170.99:3050/user/info-profile/', {
                 headers: {
                     Authorization: `${token}`
                 }
@@ -118,7 +118,7 @@ const EditProfileForm = (props) => {
 
             console.log(formDataToSend)
 
-            await axios.put('http://3.12.149.2:3050/user/update', formDataToSend, {
+            await axios.put('http://18.117.170.99:3050/user/update', formDataToSend, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `${token}`
