@@ -10,33 +10,39 @@ const EditProfileForm = (props) => {
     const { profileImage, setProfileImage } = useContext(UserProfileContext);
     const navigate = useNavigate();
     const toast = useToast();
+    const token = getToken();
 
     useEffect(() => {
         getInfoProfile();
     }, []);
-
+    
     const [formData, setFormData] = useState({
-        name: '',
+        id: '',
+        nameUser: '',
         profileName: '',
         email: '',
         cep: '',
         street: '',
-        number: '',
+        streetNumber: '',
         city: '',
-        phone: '',
-        bio: ''
+        telephone: '',
+        biography: '',
+        photo: ''
     });
 
-    const handleFileUpload = e => {
+
+
+    const handleFileUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setProfileImage(reader.result);
-            }
+                setFormData({ ...formData, photo: reader.result });
+            };
             reader.readAsDataURL(file);
         }
-    }
+    };
 
     const handleLogout = () => {
         props.setIsLogged(false);
@@ -45,30 +51,39 @@ const EditProfileForm = (props) => {
 
     const sendPhoto = () => {
         inputFile.current.click();
-    }
+    };
 
-    const getInfoProfile = async (e) => {
+    const getInfoProfile = async () => {
         try {
             const token = getToken();
+            console.log("Token:", token);
+
             const response = await axios.get('http://3.12.149.2:3050/user/info-profile/', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
 
-            const { userData } = response;
+            console.log('Resposta:', response)
+
+            const userData = response.data;
+            
+            console.log("Dados do Usuario:", userData);
 
             setFormData({
-                name: userData.name,
+                id: userData.id,
+                nameUser: userData.nameUser,
                 profileName: userData.profileName,
                 email: userData.email,
                 cep: userData.cep,
                 street: userData.street,
-                number: userData.number,
+                streetNumber: userData.streetNumber,
                 city: userData.city,
-                phone: userData.phone,
-                bio: userData.bio
-            });            
+                telephone: userData.telephone,
+                biography: userData.biography,
+                photo: userData.photo
+            });
+
 
         } catch (e) {
             toast({
@@ -78,16 +93,34 @@ const EditProfileForm = (props) => {
                 duration: 5000,
                 isClosable: true,
             });
+            console.error("Erro ao carregar perfil:", e);
         }
-
-    }
-
+    };
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
+
         try {
-            // Enviar os dados do formulário para o servidor
-            await axios.post('http://3.12.149.2:3050/user/info-profile', formData);
+            const formDataToSend = {
+                id: formData.id,
+                nameUser: formData.nameUser,
+                profileName: formData.profileName,
+                email: formData.email,
+                cep: formData.cep,
+                street: formData.street,
+                streetNumber: formData.streetNumber,
+                city: formData.city,
+                telephone: formData.telephone,
+                biography: formData.biography,
+                photo: formData.photo
+            };
+
+            await axios.post('http://3.12.149.2:3050/user/info-profile', formDataToSend, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
             toast({
                 title: "Perfil atualizado.",
                 description: "Seu perfil foi atualizado com sucesso.",
@@ -105,7 +138,7 @@ const EditProfileForm = (props) => {
                 isClosable: true,
             });
         }
-    }
+    };
 
     const handleCepChange = async (e) => {
         const newCep = e.target.value;
@@ -124,12 +157,12 @@ const EditProfileForm = (props) => {
                 console.error("Erro ao buscar CEP:", error);
             }
         }
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -146,8 +179,8 @@ const EditProfileForm = (props) => {
                 <FormControl>
                     <FormLabel>Nome</FormLabel>
                     <Input
-                        name="name"
-                        value={formData.name}
+                        name="nameUser"
+                        value={formData.nameUser}
                         onChange={handleChange}
                         placeholder=''
                     />
@@ -194,8 +227,8 @@ const EditProfileForm = (props) => {
                     <FormControl>
                         <FormLabel>Número</FormLabel>
                         <Input
-                            name="number"
-                            value={formData.number}
+                            name="streetNumber"
+                            value={formData.streetNumber}
                             onChange={handleChange}
                             placeholder='000'
                         />
@@ -213,25 +246,27 @@ const EditProfileForm = (props) => {
                 <FormControl>
                     <FormLabel>Telefone</FormLabel>
                     <Input
-                        name="phone"
-                        value={formData.phone}
+                        name="telephone"
+                        value={formData.telephone}
                         onChange={handleChange}
-                        placeholder='(00) 00 0 0000-0000'
+                        placeholder=''
                     />
                 </FormControl>
                 <FormControl>
                     <FormLabel>Biografia</FormLabel>
                     <Textarea
-                        name="bio"
-                        value={formData.bio}
+                        name="biography"
+                        value={formData.biography}
                         onChange={handleChange}
-                        placeholder='Fale sobre você aqui'
+                        placeholder=''
                     />
                 </FormControl>
-                <Button colorScheme='orange' type="submit">Salvar</Button>
+                <Button colorScheme='orange' mt={4} type="submit">
+                    Salvar
+                </Button>
             </Stack>
         </form>
     );
-}
+};
 
 export default EditProfileForm;
