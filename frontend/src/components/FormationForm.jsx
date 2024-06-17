@@ -9,7 +9,9 @@ const FormationForm = () => {
         faculdade: '',
         situacao: '',
         anoinicio: '',
-        anofim: ''
+        anofim: '',
+        turno: '',
+        semestre: ''
     });
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -75,7 +77,7 @@ const FormationForm = () => {
                 <div className="ano-container">
                     <h3 className="title-anos">Ano de início</h3>
                     <input
-                        type="text"
+                        type="number"
                         className="input-field-anos"
                         name="anoinicio"
                         value={formData.anoinicio}
@@ -85,7 +87,7 @@ const FormationForm = () => {
                 <div className="ano-container">
                     <h3 className="title-anos">Ano de término</h3>
                     <input
-                        type="text"
+                        type="number"
                         className="input-field-anos"
                         name="anofim"
                         value={formData.anofim}
