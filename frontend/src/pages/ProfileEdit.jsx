@@ -4,6 +4,7 @@ import EditProfileForm from '../components/EditProfileForm';
 import ChangePasswordForm from '../components/ChangePasswordForm';
 import InterestsForm from '../components/InterestsForm';
 import FormationForm from '../components/FormationForm';
+import CourseForm from '../components/CourseForm';
 
 const EditProfile = (props) => {
 
@@ -19,7 +20,9 @@ const EditProfile = (props) => {
             case 'Interesses':
                 return <InterestsForm />;
             case 'Formações':
-                return <FormationForm />;            
+                return <FormationForm />;
+            case 'Cursos':
+                return <CourseForm />;            
             default:
                 return null;
         }
