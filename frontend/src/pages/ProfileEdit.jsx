@@ -3,6 +3,7 @@ import { Box, Button, Flex, HStack, Image, VStack, Heading, Text, Stack } from '
 import EditProfileForm from '../components/EditProfileForm';
 import ChangePasswordForm from '../components/ChangePasswordForm';
 import InterestsForm from '../components/InterestsForm';
+import FormationForm from '../components/FormationForm';
 
 const EditProfile = (props) => {
 
@@ -17,7 +18,8 @@ const EditProfile = (props) => {
                 return <ChangePasswordForm />;
             case 'Interesses':
                 return <InterestsForm />;
-
+            case 'Formações':
+                return <FormationForm />;            
             default:
                 return null;
         }
