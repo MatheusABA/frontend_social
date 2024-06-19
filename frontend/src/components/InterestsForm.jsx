@@ -36,7 +36,7 @@ const InterestsForm = () => {
   const renderSelectedSoftwaresGroups = () => {
       return selectedSoftwares.map((software) => (
       <ButtonGroup key={software} isAttached variant="outline" mb={2}>
-        <Button leftIcon={<img src={`path/to/${software}.png`} alt={software} width="20" />} isDisabled>
+        <Button leftIcon={<img src={`../images/${software}.png`} alt={software} width="20" />} isDisabled>
           {software}
         </Button>
         <IconButton

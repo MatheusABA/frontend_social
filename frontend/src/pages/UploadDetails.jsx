@@ -35,46 +35,69 @@ const UploadDetails = () => {
     })
   }
 
+  const validateForm = () => {
+    for (const key in formData) {
+      if (formData[key] === '') {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      toast({
+        title: "Preencha todos os campos",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     const token = getToken();
+    if (!token) {
+      toast({
+        title: "Erro ao obter token",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     try {
       const formDataAll = new FormData();
       formDataAll.append('image', image);
       Object.keys(formData).forEach(key => formDataAll.append(key, formData[key]));
-      formDataAll.forEach((e) => console.log(e))
+
       const response = await axios.post('http://18.117.170.99:3050/user/post', formDataAll, {
-        headers: {  
+        headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `${token}`,
         },
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         toast({
-        title: "Postagem feita com sucesso.",
-        description: "",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      })
-    
-    } else {
-      toast({
-        title: "Erro ao fazer a postagem",
-        description: "",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }
-
-      
-
+          title: "Postagem feita com sucesso.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Erro ao fazer a postagem",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     } catch (error) {
       toast({
         title: "Erro ao fazer a postagem",
-        description: "",
+        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,
