@@ -70,8 +70,12 @@ const UploadDetails = () => {
       const formDataAll = new FormData();
       formDataAll.append('image', image);
       Object.keys(formData).forEach(key => formDataAll.append(key, formData[key]));
-      const teste = formDataAll.values()
-      console.log(teste)
+
+
+      // testa ai se funciona
+      for (let [key, value] of formDataAll.entries()) {
+        console.log(`${key}: ${value}`);
+      }
 
       const response = await axios.post('http://18.117.170.99:3050/user/post', formDataAll, {
         headers: {
