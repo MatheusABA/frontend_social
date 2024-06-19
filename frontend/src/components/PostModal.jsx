@@ -97,11 +97,16 @@ const PostModal = (props) => {
             </ModalHeader>
             <ModalContent >
                 <ModalCloseButton color={'white'} />
-                <Box backgroundSize="cover" backgroundPosition="center" w={'100%'} h={250} display={"flex"} alignItems="center" justifyContent="center" borderTopRadius="5px">
+                <Box backgroundSize="cover" backgroundPosition="center" w={'50vw'} h={'50vh'} display={"flex"} alignItems="center" justifyContent="center" borderTopRadius="5px">
                     <Image src={'../images/image_1.png'} />
+                    <Text flexWrap={'wrap'}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor. </Text>
+                    <Flex>
+                        <Button>
+                            <Image src='../images/vray-icone.png' boxSize='30px' alt='V-Ray' mr='8px' />
+                            VRay
+                        </Button>
+                    </Flex>
                 </Box>
-
-
             </ModalContent>
             </Modal>
     </>
