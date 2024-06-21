@@ -14,13 +14,13 @@ const PostModal = (props) => {
     const dateStr = props.post.createdAt;
     const date = new Date(dateStr);
 
-    const options = { year: 'numeric', month: 'long' };
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formatDate = new Intl.DateTimeFormat('pt-BR', options).format(date);
 
     const [error, setError] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
-    console.log(props.post)
-    console.log(props.user)
+    // console.log(props.post)
+    // console.log(props.user)
     const softwares = JSON.parse(props.post.softwares)
 
     const softwareIcons = {
@@ -34,20 +34,20 @@ const PostModal = (props) => {
         <>
             <WrapItem >
                 <Box  >
-                    <Image src={`http://18.117.170.99:3050/files/${props.post.pathImage}`} objectFit={'cover'} borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={400} h={250} onClick={onOpen} _hover={{cursor: 'pointer'}} />    
+                    <Image src={`http://18.117.170.99:3050/files/${props.post.pathImage}`} objectFit={'cover'} borderWidth='1px' borderColor={'#AEAEAE'} borderTopRadius={7} w={400} h={300} onClick={onOpen} _hover={{cursor: 'pointer'}} />    
                 </Box>
             </WrapItem>
             <Modal onClose={onClose} isOpen={isOpen} isCentered size={'3xl'} >
             <ModalOverlay backdropFilter='auto' backdropBlur='5px'/>
             <ModalContent>
                 <ModalHeader>
-                    <Flex>
+                    <Flex justify={'flex-start'} align={'flex-start'}>
                         <Avatar name={props.user.nameUser} src={profile} />
                         <VStack spacing={4}>
-                            <Text fontWeight={'bold'} fontSize={'24px'} color={'black'}>Lorem Ipsum dolor sit amet</Text>
+                            <Text fontWeight={'bold'} fontSize={'24px'} color={'black'}>{props.post.titlePost}</Text>
                             <HStack>
                                 <Text color={'#1D252C3D'} fontSize={'20px'}>Por</Text>
-                                <Text fontSize={'20px'} color={'#db752c'}>{'userName'}</Text>
+                                <Text fontSize={'20px'} color={'#db752c'}>{props.user.profileName}</Text>
                             </HStack>
                         </VStack>
                     </Flex>
@@ -60,9 +60,9 @@ const PostModal = (props) => {
                             alignItems="center"
                             justifyContent="center"
                             borderTopRadius="5px"
-                            p="4"
+                            p="2"
                         >
-                            <Image src={`http://18.117.170.99:3050/files/${props.post.pathImage}`} mb="4" w='45vw' h='25rem'/>
+                            <Image src={`http://18.117.170.99:3050/files/${props.post.pathImage}`} mb="4" w='100%' h='25rem'/>
                             <Text textAlign="center" mb="4" >
                                 {props.post.descriptionPost}
                             </Text>
@@ -78,7 +78,21 @@ const PostModal = (props) => {
                                 
                         </Flex>
                         <Divider/>
-
+                        <Flex justify={'flex-start'}>
+                            <Flex justify={'space-evenly'} my='10px'>
+                                <Text mx='10' >
+                                    100 Curtidas
+                                </Text>
+                                <Text mx='10' >
+                                    250 Visualizações
+                                </Text>
+                                <Text mx='10' >
+                                    {formatDate}
+                                </Text>
+                            </Flex>
+                        </Flex>
+                        
+                        
                     </ModalBody>
                 </ModalContent>
             </Modal>

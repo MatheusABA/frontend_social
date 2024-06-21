@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Stack, HStack, Flex, Image, Box, Text, Button, Wrap, WrapItem, Skeleton, IconButton, useToast } from '@chakra-ui/react'
+import { Stack, HStack, Flex, Image, Box, Text, Button, Wrap, VStack, WrapItem, Skeleton, IconButton, useToast } from '@chakra-ui/react'
 import PostModal from '../components/PostModal'
 import { UserProfileContext } from '../components/UserProfileContext';
 import { getToken, removeToken } from '../api/auth';
 import axios from 'axios'
+import VRay from '../images/V-Ray.png'
+import AutoCad from '../images/AutoCad.png'
+import Adobe from '../images/Adobe.png'
 
 
 const Perfil = (props) => {
@@ -61,8 +64,27 @@ const Perfil = (props) => {
 
     }
 
+    const softwareIcons = {
+        Adobe: Adobe,
+        VRay: VRay,
+        AutoCad: AutoCad,
+        // Adicione aqui outros softwares com suas respectivas imagens
+    };
+
     return (
-        <HStack px={50} py={'20vh'} spacing={'5vw'} alignItems={'flex-start'}>
+        <VStack spacing='2vh'>
+            <Flex justify={'flex-end'} w='80%' fontSize={'24px'} mt={'12vh'}>
+                    <HStack spacing={2} >
+                        <Text fontWeight={'bold'} >{posts.length}</Text>
+                        <Text fontColor='#00000061' mr='10px'>Trabalhos</Text>
+                    </HStack>
+                    <HStack spacing={2}>
+                        {/* Adaptar para seguidores */}
+                        <Text fontWeight={'bold'} ml='10px'>{posts.length}</Text>
+                        <Text fontColor='#00000061' mr='5px'>Seguidores</Text>
+                    </HStack>
+                </Flex>
+                <HStack px={50} py={'2vh'} spacing={'5vw'} alignItems={'flex-start'}>
             <Skeleton isLoaded={!isLoading}>
                 <Box borderWidth={'1px'} position={'relative'} borderTopRadius={7} borderColor='#EEEEEEE' maxW={'30vw'}>
                     <Image src={profileImage}  alt="Example" w={"400px"} h={"456px"} objectFit={'cover'} borderTopRadius={7}/>
@@ -87,23 +109,32 @@ const Perfil = (props) => {
                             Softwares
                         </Text>
                         <HStack>
-                            <Button>
-                                <Image src='../images/vray-icone.png' boxSize='30px' alt='V-Ray' mr='8px' />
-                                VRay
-                            </Button>
+                            {posts.forEach((post) => {
+                                const softwares = JSON.parse(post.softwares)
+                                softwares.map((software) => {
+                                    return (
+                                    <Button mx='5px' bg='#f7f7f7' _hover={{cursor: 'default'}} _active={{bg: '#f0f0f0',transform: 'scale(0.98)',borderColor: '#bec3c9',}}>
+                                        <Image src={softwareIcons[software]} boxSize='30px' alt={software} mr='8px'  />
+                                        {software}
+                                    </Button>)
+                                })
+                            })}
                         </HStack>
                     </Stack>
                 </Box>
             </Skeleton>
-            <Wrap spacing={10}  maxW={'75vw'}>
-                {/* Realizar o .map para cada post do usuário dentro de um WrapItem alterando o src da Image */}
-                {posts.map((post) => {
-                    return (
-                        <PostModal post={post} user={user} />
-                    )
-                })}
-            </Wrap>
+            <VStack spacing='3rem'>
+                <Wrap spacing={5}  maxW={'90vw'}>
+                    {/* Realizar o .map para cada post do usuário dentro de um WrapItem alterando o src da Image */}
+                    {posts.map((post) => {
+                        return (
+                            <PostModal post={post} user={user} />
+                        )
+                    })}
+                </Wrap>
+            </VStack>
         </HStack>
+        </VStack>
     )
 }
 
