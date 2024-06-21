@@ -7,7 +7,7 @@ import logo2 from '../images/marcadagua.png'
 import { useLocation } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 import user1 from '../images/jurica-koletic-7YVZYZeITc8-unsplash.png'
-import user2 from '../images/joão 1.png'
+import user2 from '../images/profile.png'
 import user3 from '../images/joão 3.png'
 import live_video from '../images/maxresdefault (2).png'
 

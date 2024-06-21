@@ -1,35 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import '../style.css'; // Certifique-se de criar um arquivo CSS correspondente
+import { useNavigate } from 'react-router-dom';
+import '../style.css';
 import uploadIcon from '../images/upload.png';
 import { getToken } from '../api/auth';
 
 const Upload = (props) => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
   const token = getToken();
-  console.log(token)
-  
 
   const handleUpload = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setSelectedFile(reader.result);
-      // const token = getToken();
-      navigate(
-        "/uploaddetails",
-        { state: { image: reader.result, token: token } }
-      );
-    };
+    navigate("/uploaddetails", { state: { file, token } });
   };
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
-    if (file) {
+    if (file && file.size <= 104857600) { // Limite de 100MB
       handleUpload(file);
+    } else {
+      alert('O arquivo é muito grande. O tamanho máximo permitido é de 100MB.');
     }
   };
 
@@ -37,8 +26,10 @@ const Upload = (props) => {
     event.preventDefault();
     setIsDragging(false);
     const file = event.dataTransfer.files[0];
-    if (file) {
+    if (file && file.size <= 104857600) { // Limite de 100MB
       handleUpload(file);
+    } else {
+      alert('O arquivo é muito grande. O tamanho máximo permitido é de 100MB.');
     }
   };
 
@@ -82,6 +73,7 @@ const Upload = (props) => {
           id="fileInput"
           className="file-input"
           onChange={handleFileSelect}
+          accept="image/png, image/jpeg"
         />
         <label className="file-label">
           <img src={uploadIcon} alt="Upload" className="upload-icon"/>
@@ -90,9 +82,7 @@ const Upload = (props) => {
           <p className='file-size'>(Máximo 100mb)</p>
         </label>
       </div>
-      <footer className="footer">
-        {/* Adicione links ou outras informações do footer aqui */}
-      </footer>
+      <footer className="footer"></footer>
     </div>
   );
 }

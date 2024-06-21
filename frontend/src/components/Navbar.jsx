@@ -6,6 +6,8 @@ import { CloseIcon, EmailIcon, HamburgerIcon } from '@chakra-ui/icons';
 import LoginModal from './LoginModal';
 import NavLink from './NavLink';
 import { UserProfileContext } from './UserProfileContext';
+import { useLocation } from 'react-router-dom';
+import nuvem from '../images/upload-na-nuvem.png'
 
 const Links = [
 	{ name: 'Inicio', route: '/'},
@@ -19,6 +21,8 @@ const Navbar = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { profileImage } = useContext(UserProfileContext);
 
+    const location = useLocation();
+
     return (
         <>
             <Box bgColor='white' px={4}>
@@ -27,8 +31,8 @@ const Navbar = (props) => {
                         <IconButton bg={'parent'} size={'md'} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} onClick={isOpen ? onClose : onOpen} />
                     </Flex>
                     <HStack spacing={8} alignItems='center'>
-                        <Box alignItems={'center'} display={'flex'} mx={1}>
-                            <Image src={logo} mx={2}/>
+                        <Box alignItems={'center'} display={'flex'} mx={1} as={Link} to={'/'}>
+                            <Image src={logo} mx={2} />
                         </Box>
                         <Box display={!props.isUpload ? 'flex' : 'none'}>
                             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
@@ -61,6 +65,13 @@ const Navbar = (props) => {
                                     <IconButton icon={<EmailIcon />} variant={'ghost'} />
                                     <AvatarBadge boxSize='1em' bg='tomato' />
                                 </Avatar>
+                                {location.pathname !== '/' && !props.isUpload? (
+                                    <Button leftIcon={<Image src={nuvem} w='20px' h='20px' />} bg='#ffffff' borderColor={'#eeeeee'} borderWidth={'2px'} borderRadius={'5px'} as={Link} to={'/upload'}>
+                                        Upload
+                                    </Button>
+                                    ) : (<></>)}
+
+                                    
                             </HStack>
                         )
                     )}

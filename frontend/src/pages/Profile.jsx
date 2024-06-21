@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react'
-import { Link as Reactlink, useNavigate } from 'react-router-dom'
-import { Stack, HStack, Flex, Image, Box, Text, Button, Badge, Wrap, WrapItem, Skeleton, IconButton } from '@chakra-ui/react'
+import React, { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Stack, HStack, Flex, Image, Box, Text, Button, Wrap, WrapItem, Skeleton, IconButton, useToast } from '@chakra-ui/react'
 import PostModal from '../components/PostModal'
 import { UserProfileContext } from '../components/UserProfileContext';
+import { getToken, removeToken } from '../api/auth';
+import axios from 'axios'
 
 
 const Perfil = (props) => {
@@ -13,22 +15,50 @@ const Perfil = (props) => {
 
     const [isLoading, setiIsloading] = useState(false)
 
-    // useEffect(() => {
-    //     // Pegar postagens e salvar em variável
-    //     return () => {
-    //         second
-    //     }
-    // }, [])
+    const toast = useToast();
+    // Realizar um await fetch na tabela de postagens e alterar os recebimentos
+    // const { image, description, softwares, data } = await fetch(posts) algo do tipo
+
+    useEffect(() => {
+        getPostInfo();
+    }, []);
+    
+    const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState({});
+
+    const getPostInfo = async () => {
+        try {
+            const token = getToken();
+            console.log("Token:", token);
+            
+            const response = await axios.get('http://18.117.170.99:3050/user/user-posts/', {
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
+
+            // console.log('Resposta:', response.data)
+            // console.log('Status:', response.status)
+
+            setPosts(response.data.posts);
+            setUser(response.data.user);
+
+        } catch (e) {
+            toast({
+                title: "Erro ao carregar informações da postagem.",
+                description: "Ocorreu um erro ao tentar carregar essa postagem.",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+            console.error("Erro ao carregar postagem:", e);
+        }
+    };
 
     const editProfile = (props) => {
         // const userId = localStorage()
         navigate(`/editprofile`)
 
-    }
-
-
-    const getUserData = () => {
-        // puxa informações do BD
     }
 
     return (
@@ -65,16 +95,13 @@ const Perfil = (props) => {
                     </Stack>
                 </Box>
             </Skeleton>
-            <Wrap spacing={10}  maxW={'70vw'}>
+            <Wrap spacing={10}  maxW={'75vw'}>
                 {/* Realizar o .map para cada post do usuário dentro de um WrapItem alterando o src da Image */}
-                <PostModal />
-                <PostModal />
-                <PostModal />
-                <PostModal />
-                <PostModal />
-                <PostModal />
-                <PostModal />
-                <PostModal />
+                {posts.map((post) => {
+                    return (
+                        <PostModal post={post} user={user} />
+                    )
+                })}
             </Wrap>
         </HStack>
     )

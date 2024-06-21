@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Input, Textarea, HStack, Image, Stack, Text, FormControl, FormLabel, useToast } from '@chakra-ui/react';
+import { Box, Button, Input, Textarea, HStack, Image, Stack, Text, Avatar, FormControl, FormLabel, useToast } from '@chakra-ui/react';
 import { UserProfileContext } from './UserProfileContext';
 import { useNavigate } from 'react-router-dom';
 import { getToken, removeToken } from '../api/auth';
 
 const EditProfileForm = (props) => {
-    const inputFile = useRef(null);
     const { profileImage, setProfileImage } = useContext(UserProfileContext);
     const navigate = useNavigate();
     const toast = useToast();
@@ -26,32 +25,25 @@ const EditProfileForm = (props) => {
         streetNumber: '',
         city: '',
         telephone: '',
-        biography: '',
-        // photo: ''
+        biography: ''
     });
 
 
 
     const handleFileUpload = (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProfileImage(reader.result);
-                setFormData({ ...formData, photo: reader.result });
-            };
-            reader.readAsDataURL(file);
+        if (file && file.size <= 104857600) { // Limite de 100MB
+            setProfileImage(file);
+        } else {
+            alert('O arquivo é muito grande. O tamanho máximo permitido é de 100MB.');
         }
+        console.log(profileImage)
     };
 
     const handleLogout = () => {
         removeToken();
         props.setIsLogged(false);
         navigate("/");
-    };
-
-    const sendPhoto = () => {
-        inputFile.current.click();
     };
 
     const getInfoProfile = async () => {
@@ -82,7 +74,6 @@ const EditProfileForm = (props) => {
                 city: userData.city,
                 telephone: userData.telephone,
                 biography: userData.biography,
-                photo: userData.photo
             });
 
 
@@ -113,14 +104,13 @@ const EditProfileForm = (props) => {
                 city: formData.city,
                 telephone: formData.telephone,
                 biography: formData.biography,
-                // photo: formData.photo,
             };
 
             console.log(formDataToSend)
 
             await axios.put('http://18.117.170.99:3050/user/update', formDataToSend, {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                     Authorization: `${token}`
                 }
             });
@@ -145,20 +135,27 @@ const EditProfileForm = (props) => {
     };
 
     const handleCepChange = async (e) => {
-        const newCep = e.target.value;
+        let newCep = e.target.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    
+        if (newCep.length > 5) {
+            newCep = `${newCep.slice(0, 5)}-${newCep.slice(5)}`;
+        }
+    
         setFormData({ ...formData, cep: newCep });
-
-        if (newCep.length === 8) {
+    
+        if (newCep.length === 9) { // Considerando o traço, o CEP tem 9 caracteres
+            const cleanedCep = newCep.replace('-', '');
             try {
-                const response = await axios.get(`https://viacep.com.br/ws/${newCep}/json/`);
-                const { logradouro, localidade } = response.data;
-                setFormData({
-                    ...formData,
-                    street: logradouro,
-                    city: localidade
-                });
+            const response = await axios.get(`https://viacep.com.br/ws/${cleanedCep}/json/`);
+            const { logradouro, localidade } = response.data;
+            setFormData({
+                ...formData,
+                cep: newCep,
+                street: logradouro,
+                city: localidade,
+            });
             } catch (error) {
-                console.error("Erro ao buscar CEP:", error);
+            console.error("Erro ao buscar CEP:", error);
             }
         }
     };
@@ -173,11 +170,11 @@ const EditProfileForm = (props) => {
             <Stack spacing={4} mt={'5vh'} mx={'5vw'}>
                 <Box flex="1" pl={1}>
                     <HStack spacing={4} mb={8}>
-                        <Image borderRadius='full' boxSize='100px' src={profileImage} alt='Profile Image' />
-                        <Button onClick={sendPhoto} colorScheme='orange'>Alterar foto de perfil</Button>
-                        <Button>Deletar</Button>
+                        <Avatar boxSize='100px' src={profileImage} alt='Profile Image' name={formData.nameUser} />
+                        <Button onClick={() => document.getElementById('fileInput').click()} colorScheme='orange'>Alterar foto de perfil</Button>
+                        <Button onClick={setProfileImage(null)}>Deletar</Button>
                         <Button ml='20vw' onClick={handleLogout}>Desconectar</Button>
-                        <input type="file" ref={inputFile} onChange={handleFileUpload} style={{ display: 'none' }} />
+                        <input id='fileInput' type="file" onChange={handleFileUpload} style={{ display: 'none' }} accept="image/png, image/jpeg" />
                     </HStack>
                 </Box>
                 <FormControl>

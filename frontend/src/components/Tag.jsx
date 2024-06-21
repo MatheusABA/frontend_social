@@ -1,6 +1,6 @@
 import React from 'react';
 import '../style.css'; // Ajuste o caminho conforme a estrutura do seu projeto
-import tagIcon from '../images/vray-icone.png';
+import tagIcon from '../images/V-Ray.png';
 
 const Tag = ({ label, onDelete }) => {
   return (
