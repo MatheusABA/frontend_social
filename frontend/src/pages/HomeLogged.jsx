@@ -1,6 +1,8 @@
-import React, {useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getToken } from "../api/auth"
+import axios from 'axios'
+import { Stack, HStack, Flex, Image, Box, Text, Button, Wrap, VStack, WrapItem, Skeleton, IconButton, useToast } from '@chakra-ui/react'
 
 //components
 import logo from '../images/arqnex_rodape.png'
@@ -54,11 +56,73 @@ const HomeLogged = (props) => {
     navigate('/upload', { state: { token: token}})
   }
 
+  /* ------ Pegar informações do perfil -----*/
+  const toast = useToast();
+  useEffect(() => {
+      getInfoProfile();
+  }, []);
+  
+  const [formData, setFormData] = useState({
+      id: '',
+      nameUser: '',
+      profileName: '',
+      email: '',
+      cep: '',
+      street: '',
+      streetNumber: '',
+      city: '',
+      telephone: '',
+      biography: ''
+  });
+
+  const getInfoProfile = async () => {
+      try {
+          const token = getToken();
+          console.log("Token:", token);
+
+          const response = await axios.get('http://18.117.170.99:3050/user/info-profile/', {
+              headers: {
+                  Authorization: `${token}`
+              }
+          });
+
+          console.log('Resposta:', response)
+
+          const userData = response.data.user;
+          
+          console.log("Dados do Usuario:", userData);
+
+          setFormData({
+              id: userData.id,
+              nameUser: userData.nameUser,
+              profileName: userData.profileName,
+              email: userData.email,
+              cep: userData.cep,
+              street: userData.street,
+              streetNumber: userData.streetNumber,
+              city: userData.city,
+              telephone: userData.telephone,
+              biography: userData.biography,
+          });
+
+
+      } catch (e) {
+          toast({
+              title: "Erro ao carregar informações de perfil.",
+              description: "Ocorreu um erro ao tentar carregar seu perfil.",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+          });
+          console.error("Erro ao carregar perfil:", e);
+      }
+  };
+
     return(
         <>
             {/* DIV DA PARTE SUPERIOR DA TELA, RELACIONADO AS REDES SOCIAIS, ENTRAR AGORA E COMO FUNCIONA */}
             <div className="grid lg:px-44 md:px-20 sm:px-14 lg:py-20 md:py-20 sm:py-20"> 
-                <h1 className="text-6xl font-semibold">Olá usuário.</h1>
+                <h1 className="text-6xl font-semibold">Olá, {formData.nameUser}.</h1>
                 <h4 className="text-3xl font-normal text-gray-300 break-words pt-3 lg:max-w-92 md:max-w-92 sm:max-w-full">Lorem ipsum dolor sit amet, conseteur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</h4>
                 
                 <div className="lg:flex md:grid sm:grid lg:space-x-10 mg:space-x-10 sm:space-y-5 lg:pt-5 md:pt-5 sm:pt-5">

@@ -8,6 +8,7 @@ import axios from 'axios'
 import VRay from '../images/V-Ray.png'
 import AutoCad from '../images/AutoCad.png'
 import Adobe from '../images/Adobe.png'
+import defaultimage from '../images/do-utilizador.png'
 
 
 const Perfil = (props) => {
