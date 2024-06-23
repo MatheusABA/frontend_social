@@ -71,6 +71,69 @@ const Perfil = (props) => {
         // Adicione aqui outros softwares com suas respectivas imagens
     };
 
+    /* ------ Pegar informações do perfil -----*/
+    const token = getToken();
+
+    useEffect(() => {
+        getInfoProfile();
+    }, []);
+    
+    const [formData, setFormData] = useState({
+        id: '',
+        nameUser: '',
+        profileName: '',
+        email: '',
+        cep: '',
+        street: '',
+        streetNumber: '',
+        city: '',
+        telephone: '',
+        biography: ''
+    });
+
+    const getInfoProfile = async () => {
+        try {
+            const token = getToken();
+            console.log("Token:", token);
+
+            const response = await axios.get('http://18.117.170.99:3050/user/info-profile/', {
+                headers: {
+                    Authorization: `${token}`
+                }
+            });
+
+            console.log('Resposta:', response)
+
+            const userData = response.data.user;
+            
+            console.log("Dados do Usuario:", userData);
+
+            setFormData({
+                id: userData.id,
+                nameUser: userData.nameUser,
+                profileName: userData.profileName,
+                email: userData.email,
+                cep: userData.cep,
+                street: userData.street,
+                streetNumber: userData.streetNumber,
+                city: userData.city,
+                telephone: userData.telephone,
+                biography: userData.biography,
+            });
+
+
+        } catch (e) {
+            toast({
+                title: "Erro ao carregar informações de perfil.",
+                description: "Ocorreu um erro ao tentar carregar seu perfil.",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+            console.error("Erro ao carregar perfil:", e);
+        }
+    };
+
     return (
         <VStack spacing='2vh'>
             <Flex justify={'flex-end'} w='80%' fontSize={'24px'} mt={'12vh'}>
@@ -94,13 +157,13 @@ const Perfil = (props) => {
                     <Stack maxW='400px' px='2vh' spacing='5'>
                         <Flex direction='column' justify='space-between' alignItems='center' mt='2'>
                             <Text fontSize="24px" fontWeight="bold" mt="38px">
-                                Nome Usuário
+                                {formData.nameUser}
                             </Text>
                             <Text fontSize="24px" fontWeight="medium" color="#1D252C61">
-                                Cidade
+                                {formData.city}
                             </Text>
                             <Text fontSize="20px" fontWeight="regular" color="#1D252C" textAlign='center' pt='10'>
-                                Biografia
+                                {formData.biography}
                             </Text>
                         </Flex>
                     </Stack>
