@@ -144,7 +144,7 @@ const Perfil = (props) => {
                     </HStack>
                     <HStack spacing={2}>
                         {/* Adaptar para seguidores */}
-                        <Text fontWeight={'bold'} ml='10px'>{posts.length}</Text>
+                        <Text fontWeight={'bold'} ml='10px'>0</Text>
                         <Text fontColor='#00000061' mr='5px'>Seguidores</Text>
                     </HStack>
                 </Flex>
