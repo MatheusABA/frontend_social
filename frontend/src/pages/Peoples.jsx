@@ -15,7 +15,7 @@ const Peoples = (props) => {
   
     const fetchUsers = (page) => {
       // Substitua a URL abaixo pela URL correta do seu endpoint backend
-      fetch(`https://api.seusite.com/users?page=${page}&limit=5`)
+      fetch(`https://18.117.170.99:3050/users?page=${page}&limit=5`)
         .then(response => response.json())
         .then(data => {
           if (data.length > 0) {

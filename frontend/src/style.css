@@ -585,7 +585,7 @@
 /* ---------- Estilos Tela Peoples ----------- */
 .peoples-title {
   padding-top: 50px;
-  padding-left: 200px;
+  padding-left: 180px;
   padding-bottom: 50px;
 }
 
@@ -654,9 +654,8 @@
 
 .peoples-user-card {
   padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  background-color: #f9f9f9;
+  border-top: 1px solid #ccc;
+  padding-left: 180px;
 }
 
 .peoples-profile-info {
@@ -666,6 +665,8 @@
 
 .peoples-published-works img {
   border-radius: 0.25rem;
+  padding: 5px;
+  max-width: 260px;
 }
 
 .peoples-grid-cols-2 {
@@ -743,4 +744,22 @@
 
 .peoples-style-buttons {
   justify-content: center;
+}
+
+.peoples-ml-4 h3 {
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 80px;
+  min-width:  262px;
+  max-width:  263px;
+}
+
+.peoples-h-12 {
+  height: 100px;
+}
+
+.peoples-ml-4 p {
+  padding-left: 15px;
+  color:#b8b8b8;
 }
