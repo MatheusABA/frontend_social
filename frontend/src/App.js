@@ -19,6 +19,7 @@ import Courses from './pages/Courses'
 import Live from './pages/Live'
 import { UserProfileProvider } from './components/UserProfileContext'
 import { getToken } from './api/auth'
+import Peoples from './pages/Peoples'
 
 // app
 
@@ -50,6 +51,7 @@ useEffect(() => {
                 <Route path="/pro" element={<SerProPage/>}/>
                 <Route path="/courses" element={<Courses/>}/>
                 <Route path="/live" element={<Live/>}/>
+                <Route path="/peoples" element={<Peoples/>}/>
               </Routes>
             </div>
         </BrowserRouter>

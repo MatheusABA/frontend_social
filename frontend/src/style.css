@@ -581,3 +581,166 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+/* ---------- Estilos Tela Peoples ----------- */
+.peoples-title {
+  padding-top: 50px;
+  padding-left: 200px;
+  padding-bottom: 50px;
+}
+
+.peoples-title .peoples{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.peoples-title .peoples-description{
+  font-size: 15px;
+  max-width: 660px;
+  color:#b8b8b8;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.peoples-flex {
+  display: flex;
+}
+
+.peoples-justify-between {
+  justify-content: space-between;
+}
+
+.peoples-items-center {
+  align-items: center;
+}
+
+.peoples-mt-4 {
+  margin-top: 1rem;
+}
+
+.peoples-px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.peoples-p-2 {
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.peoples-border {
+  border: 1px solid #ccc;
+}
+
+.peoples-rounded {
+  border-radius: 0.25rem;
+}
+
+.peoples-space-x-4 > * + * {
+  margin-left: 1rem;
+}
+
+.peoples-border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.peoples-border-black {
+  border-color: #DB752C;
+}
+
+.peoples-border-transparent {
+  border-color: transparent;
+}
+
+.peoples-user-card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  background-color: #f9f9f9;
+}
+
+.peoples-profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.peoples-published-works img {
+  border-radius: 0.25rem;
+}
+
+.peoples-grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.peoples-grid-cols-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.peoples-gap-4 {
+  gap: 1rem;
+}
+
+.peoples-mt-10 {
+  margin-top: 2.5rem;
+}
+
+.peoples-ml-2 {
+  margin-left: 0.5rem;
+}
+
+.peoples-justify-auto {
+  justify-items: auto;
+}
+
+.peoples-font-light {
+  font-weight: 300;
+}
+
+.peoples-text-xs {
+  font-size: 0.75rem;
+}
+
+.peoples-text-right {
+  text-align: right;
+}
+
+.peoples-font-semibold {
+  font-weight: 600;
+}
+
+.peoples-text-purple-700 {
+  color: #6b46c1;
+}
+
+.peoples-mb-4 {
+  margin-bottom: 1rem;
+}
+
+.peoples-justify-center {
+  justify-content: center;
+}
+
+.peoples-bg-gray-200 {
+  background-color: #e2e8f0;
+}
+
+.peoples-filters-container {
+  width: 100%;
+}
+
+.peoples-filter-dropdown,
+.peoples-style-buttons,
+.peoples-search-box {
+  flex: 1;
+}
+
+.peoples-filter-dropdown select,
+.peoples-search-box input {
+  width: 100%;
+}
+
+.peoples-style-buttons {
+  justify-content: center;
+}
