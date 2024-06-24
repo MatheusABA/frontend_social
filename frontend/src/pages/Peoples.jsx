@@ -10,6 +10,8 @@ const Peoples = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  const BASE_IMAGE_URL = "http://18.117.170.99:3050/files"; // Defina a URL base do servidor onde as imagens estão hospedadas
+
   useEffect(() => {
     fetchUsers(page);
   }, [page]);
@@ -97,7 +99,7 @@ const Peoples = () => {
             </div>
             <div className="peoples-published-works peoples-flex peoples-ml-4">
               {posts[user.id] && posts[user.id].slice(0, 3).map((post, index) => (
-                <img key={index} src={post.pathImage} alt={`Postagem ${index + 1}`} className="peoples-h-16 peoples-w-16 peoples-object-cover peoples-mr-2"/>
+                <img key={index} src={`${BASE_IMAGE_URL}${post.pathImage}`} alt={`Postagem ${index + 1}`} className="peoples-h-16 peoples-w-16 peoples-object-cover peoples-mr-2"/>
               ))}
             </div>
           </div>
