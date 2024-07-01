@@ -10,14 +10,14 @@ const Peoples = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const BASE_IMAGE_URL = "http://18.117.170.99:3050/files"; // Defina a URL base do servidor onde as imagens estão hospedadas
+  const BASE_IMAGE_URL = ""; // Defina a URL base do servidor onde as imagens estão hospedadas
 
   useEffect(() => {
     fetchUsers(page);
   }, [page]);
 
   const fetchUsers = (page) => {
-    fetch(`http://18.117.170.99:3050/user/all?page=${page}&limit=5`)
+    fetch(``)
       .then(response => response.json())
       .then(data => {
         if (data.users && data.users.length > 0) {
@@ -33,7 +33,7 @@ const Peoples = () => {
 
   const fetchPostsForUsers = (users) => {
     const userIds = users.map(user => user.id).join(',');
-    fetch(`http://18.117.170.99:3050/user/user-posts/${userIds}`)
+    fetch(``)
       .then(response => response.json())
       .then(data => {
         const postsByUser = data.posts.reduce((acc, post) => {

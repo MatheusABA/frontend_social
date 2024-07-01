@@ -35,7 +35,7 @@ const Perfil = (props) => {
             const token = getToken();
             console.log("Token:", token);
             
-            const response = await axios.get('http://18.117.170.99:3050/user/user-posts/', {
+            const response = await axios.get('', {
                 headers: {
                     Authorization: `${token}`
                 }
@@ -97,7 +97,7 @@ const Perfil = (props) => {
             const token = getToken();
             console.log("Token:", token);
 
-            const response = await axios.get('http://18.117.170.99:3050/user/info-profile/', {
+            const response = await axios.get('', {
                 headers: {
                     Authorization: `${token}`
                 }
